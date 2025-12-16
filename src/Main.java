@@ -1,6 +1,13 @@
 public class Main {
-    public static void main(String[] args) {
-
-        System.out.println("Probando que funciona");
-    }
+    /*
+    Pedir entrada Blancas/Negras y guardarlo como strings.
+    Generar tablero y pasarle los strings.
+    Comprobar si tablero válido.
+    Comprobar si jaque.
+    Imprimir si válido.
+    Si no jaque, pedir quien mueve.
+    Pedir movimiento.
+    Comprobar movimiento válido.
+    Imprimir nuevo tablero si válido.
+    */
 }
