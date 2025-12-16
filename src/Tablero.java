@@ -1,25 +1,21 @@
 public class Tablero {
-    Pieza tablero [][];
+    // Matriz que representa el tablero de ajedrez de 8x8
+    // Cada celda puede contener una pieza o '.' si está vacía
+    private char[][] tablero;
 
-
-    Tablero (){
-        this.tablero= new Pieza[8][8];
+    // Crea un tablero vacío
+    public Tablero() {
+        tablero = new char[8][8]; // Crear la matriz de 8 filas x 8 columnas
+        inicializar();            // Llenar el tablero con '.' haciendo referencias a las celdas vacías
     }
 
-    public void ColocarPiezas (String posicion){
+    // Esto hace que se inicialize el tablero entero con '.'
+    public void inicializar() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                tablero[i][j] = '.';
 
-    }
-
-    public Pieza getTablero(Posicion p) {
-        return tablero[p.getFila()][p.getColumna()];
-    }
-
-    public void setTablero(Pieza pieza, Posicion p) {
-        this.tablero[p.getFila()][p.getColumna()] = pieza;
-    }
-
-    @Override
-    public String toString() {
-        return "Printea";
+            }
+        }
     }
 }
