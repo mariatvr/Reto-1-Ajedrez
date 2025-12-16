@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Estoy pensando cositas">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tablero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tablero.java" afterDir="false" />
-    </list>
+    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,10 +51,20 @@
       <option name="presentableId" value="Default" />
       <updated>1765785896930</updated>
     </task>
+    <task id="LOCAL-00001" summary="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)">
+      <option name="closed" value="true" />
+      <created>1765878638810</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765878638810</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Estoy pensando cositas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Estoy pensando cositas" />
+    <MESSAGE value="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)" />
   </component>
 </project>
