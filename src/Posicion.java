@@ -72,7 +72,15 @@ public class Posicion {
         return this.columna == c;
     }
 
+    public Posicion getDerivada(char signo, char direccion){
+        int c=0;
+        int f=0;
+
+        return new Posicion(f, c);
+    }
+
     /**
+     *
      * Comprueba si la posición actual coincide exactamente
      * con la fila y columna indicadas.
      *

@@ -34,28 +34,29 @@ public class Peon extends Pieza{
         if(p.comprobarFila(this.p.getFila()+1)){
 
             // Movimiento recto sin captura
-            if(p.comprobarColumna(this.p.getColumna())&&t.getTablero(p)==null) {
+            if(p.comprobarColumna(this.p.getColumna())&& t.caminoLibre(this.p,p,0)) {
 
                 //Mueve a la posición
                 valido = true;
                 this.p=p; //Actualiza posición
-                t.setTablero(null,this.p); //Elimina la ficha de su posición inicial
-                t.setTablero(this, p); //Coloca la ficha en el tablero
+                t.setPieza(null,this.p); //Elimina la ficha de su posición inicial
+                t.setPieza(this, p); //Coloca la ficha en el tablero
             }
+
             // Captura en diagonal
             else if(p.comprobarColumna(this.p.getColumna()+1)||p.comprobarColumna(this.p.getColumna()-1)){
 
                 //Hay una pieza en la casilla a la que se mueve
-                if(t.getTablero(p)!=null)
+                if(t.getPosicion(p)!=null)
 
                     //La ficha es del otro bando
-                    if(t.getTablero(p).getBlancas()!=this.blancas) {
+                    if(t.getPosicion(p).getBlancas()!=this.blancas) {
 
                         //Mueve a la posición
                         valido = true;
                         this.p = p;
-                        t.setTablero(null,this.p); //Elimina la ficha de su posición inicial
-                        t.setTablero(this, p); //Coloca la ficha en el tablero
+                        t.setPieza(null,this.p); //Elimina la ficha de su posición inicial
+                        t.setPieza(this, p); //Coloca la ficha en el tablero
                     }
             }
         }

@@ -7,11 +7,11 @@ que se van haciendo con las piezas (movimiento del rey, torre, alfil, caballo, e
 
 ## 🚀 Cómo descargar o abrir el proyecto
 
-1. Entra en el repositorio en GitHub.
-2. Pulsa el botón verde **"Code"**.
-3. Pulsa **"Download ZIP"**.
-4. Descomprime el archivo.
-5. Abre IntelliJ → **File → Open** → selecciona la carpeta del proyecto.
+1. Entra en IntelliJ (debes tener conectado GitHub e IntelliJ.
+2. Entra en File -> New -> Project From Version Control .
+3. En el menú emergente que aparece, si le das a la izquierda en GitHub te aparecerán tus repositorios.
+4. Debes hacer click en el que quieres abrir y clonarlo.
+5. Si al hacer click en GitHub a la izquierda al abrir el menú tu cuenta no está sincronizada, te lo pedirá y al hacer login te aparecerán.
 
 ---
 
