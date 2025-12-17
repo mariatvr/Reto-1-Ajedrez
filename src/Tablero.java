@@ -29,7 +29,7 @@ public class Tablero {
 
     @Override
     public String toString() {
-        // StringBuilder se usa para construir el String
+
         StringBuilder sb = new StringBuilder();
 
         // Recorremos todas las filas del tablero (0 a 7)
@@ -38,9 +38,14 @@ public class Tablero {
             // Recorremos todas las columnas de la fila actual
             for (int col = 0; col < 8; col++) {
 
-                // Si no hay pieza en la posición, imprimimos un punto para indicar casilla vacía
+                // Si no hay pieza en la posición, imprimimos un símbolo alternado para casillas
                 if (tablero[fila][col] == null) {
-                    sb.append(". "); // ". " representa una casilla vacía
+
+                    if ((fila + col) % 2 == 0) {
+                        sb.append("□ "); // Casilla clara
+                    } else {
+                        sb.append("■ "); // Casilla oscura
+                    }
                 } else {
                     // Si hay una pieza, llamamos a su toString() para mostrarla
                     sb.append(tablero[fila][col].toString() + " ");
@@ -52,6 +57,7 @@ public class Tablero {
         }
         return sb.toString();
     }
+
 
 
 }
