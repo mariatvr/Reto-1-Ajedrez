@@ -1,6 +1,5 @@
 /**
  * Representa la pieza Peón del juego de ajedrez.
- *
  * El peón puede avanzar una casilla hacia delante si está libre
  * o capturar en diagonal una pieza del bando contrario.
  */
@@ -26,12 +25,6 @@ public class Peon extends Pieza{
      * @return true si el movimiento es válido y se realiza,
      * false en caso contrario
      */
-
-    @Override
-    public String toString() {
-        return blancas ? "♙" : "♟";
-    }
-
     public boolean mover(Tablero t, Posicion p) {
         boolean valido=false;
 
@@ -67,5 +60,10 @@ public class Peon extends Pieza{
         }
 
         return valido;
+    }
+
+    @Override
+    public String toString() {
+        return blancas ? "♙" : "♟";
     }
 }
