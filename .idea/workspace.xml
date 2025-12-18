@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Caballo.java añadido">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Caballo.java añadido completo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,7 +124,31 @@
       <option name="project" value="LOCAL" />
       <updated>1766043548876</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Caballo.java añadido">
+      <option name="closed" value="true" />
+      <created>1766045376876</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1766045376876</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Caballo.java añadido">
+      <option name="closed" value="true" />
+      <created>1766045441115</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1766045441115</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Caballo.java añadido completo">
+      <option name="closed" value="true" />
+      <created>1766045515701</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1766045515702</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,6 +160,7 @@
     <MESSAGE value="Tablero Vacio:" />
     <MESSAGE value="Tablero con Peones ya colocados" />
     <MESSAGE value="Caballo.java añadido" />
-    <option name="LAST_COMMIT_MESSAGE" value="Caballo.java añadido" />
+    <MESSAGE value="Caballo.java añadido completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Caballo.java añadido completo" />
   </component>
 </project>
