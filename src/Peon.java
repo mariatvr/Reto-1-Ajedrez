@@ -63,9 +63,4 @@ public class Peon extends Pieza{
 
         return valido;
     }
-
-    @Override
-    public String toString() {
-        return blancas ? "♙" : "♟";
-    }
 }
