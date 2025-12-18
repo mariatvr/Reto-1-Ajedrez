@@ -25,10 +25,12 @@ public class Peon extends Pieza{
      * @return true si el movimiento es válido y se realiza,
      * false en caso contrario
      */
+
     public boolean mover(Tablero t, Posicion p) {
         boolean valido=false;
 
-        // Comprobación de avance una fila hacia delante
+        // Comprobación de av
+        // ance una fila hacia delante
         if(p.comprobarFila(this.p.getFila()+1)){
 
             // Movimiento recto sin captura

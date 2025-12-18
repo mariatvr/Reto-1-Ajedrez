@@ -16,12 +16,9 @@ public class Main {
 
         Tablero tablero = new Tablero();
 
-        // Colocar peones negros y blancos
-        tablero.colocarPiezas("peon", false); // fila 1
-        tablero.colocarPiezas("peon", true);  // fila 6
 
         // Imprimir tablero
-        System.out.println("Tablero con peones:");
+        System.out.println("Tablero Vacio:");
         System.out.println(tablero);
     }
 }
