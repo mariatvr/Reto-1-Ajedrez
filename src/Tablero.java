@@ -8,6 +8,14 @@ public class Tablero {
 
     public void colocarPiezas (String posicion, boolean blancas){
 
+        if (!posicion.equalsIgnoreCase("peon")) return;
+
+        int fila = blancas ? 6 : 1; // fila 6 para blancos, 1 para negros
+
+        for (int col = 0; col < 8; col++) {
+            Posicion p = new Posicion(fila, col);
+            setPieza(new Peon(p, blancas), p);
+        }
     }
 
     /**

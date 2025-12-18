@@ -1,4 +1,5 @@
 public class Main {
+
     /*
     Pedir entrada Blancas/Negras y guardarlo como strings.
     Generar tablero y pasarle los strings.
@@ -15,8 +16,13 @@ public class Main {
 
         Tablero tablero = new Tablero();
 
-            System.out.println("Tablero vacío:");
-            System.out.println(tablero);
-        }
+        // Colocar peones negros y blancos
+        tablero.colocarPiezas("peon", false); // fila 1
+        tablero.colocarPiezas("peon", true);  // fila 6
+
+        // Imprimir tablero
+        System.out.println("Tablero con peones:");
+        System.out.println(tablero);
     }
+}
 
