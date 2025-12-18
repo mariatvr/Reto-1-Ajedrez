@@ -21,7 +21,7 @@ public class Torre extends Pieza {
         if (mismaFila != mismaColumna) {
 
             // 2. Verificar que no haya piezas en el camino
-            if (t.caminoLibre(this.p, p)) {
+            if (t.caminoLibre(this.p, p, 0)) {
 
                 Pieza destino = t.getPosicion(p);
 
