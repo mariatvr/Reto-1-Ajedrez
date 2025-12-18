@@ -12,6 +12,7 @@ public class Torre extends Pieza {
     @Override
     public boolean mover(Tablero t, Posicion p) {
         boolean valido = false;
+        boolean mueve=false;
 
         // 1. Comprobar si el movimiento es horizontal o vertical
         // (Misma fila o misma columna, pero no ambas a la vez)
@@ -27,8 +28,8 @@ public class Torre extends Pieza {
 
                 // 3. Si el destino está vacío o hay un enemigo, el movimiento es válido
                 if (destino == null || destino.getBlancas() != this.blancas) {
-
                     valido = true;
+                     mueve=true;
 
                     // IMPORTANTE: Primero limpiamos la posición de ORIGEN en el tablero
                     t.setPieza(null, this.p);
@@ -44,4 +45,10 @@ public class Torre extends Pieza {
 
         return valido;
     }
+
+    @Override
+    public String toString() {
+        return blancas ? "♖" : "♜";
+    }
+
 }

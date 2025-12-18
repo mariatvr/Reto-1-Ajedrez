@@ -13,9 +13,16 @@ public class Main {
     Imprimir nuevo tablero si válido.
     */
 
+    public static void jugadorInicial(){
+
+    }
+
     public static void pidoMovimiento(){
         String movimiento;
-        String patron = "[TCARD]?[a-h][1-8]";
+        String patron = "[TCARD]?[1-8]?[a-h][1-8]";
+        //Hay un posible numero seguido de la mayúscula que indica la fila
+        // de la figura que queremos mover en caso de que haya otra de
+        // su mismo tipo en esa misma columna.
 
         boolean valido=true;
         Scanner sc = new Scanner(System.in);
