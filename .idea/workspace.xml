@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Tablero Contruido">
+    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Tablero Modificado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tablero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tablero.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765958885911</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Tablero Modificado">
+      <option name="closed" value="true" />
+      <created>1765962946341</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765962946342</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -87,6 +94,7 @@
     <MESSAGE value="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)" />
     <MESSAGE value="Añadida la clase Tablero e iniclizadas todas las casillas como '.' para tener una imagen incicial del tablero :)" />
     <MESSAGE value="Tablero Contruido" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tablero Contruido" />
+    <MESSAGE value="Tablero Modificado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tablero Modificado" />
   </component>
 </project>
