@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Caballo.java añadido completo" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ivotorgar&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mariatvr/Reto-1-Ajedrez.git&quot;,
+    &quot;accountId&quot;: &quot;221c80c0-9a60-4e49-9343-a1e52cdf5574&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="36sCSvVErcstWukImHTfnJ08oiY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Tablero.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="" />
+      <created>1765785896930</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765785896930</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)">
+      <option name="closed" value="true" />
+      <created>1765878638810</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765878638810</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Añadida la clase Tablero e iniclizadas todas las casillas como '.' para tener una imagen incicial del tablero :)">
+      <option name="closed" value="true" />
+      <created>1765878730075</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765878730075</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tablero Contruido">
+      <option name="closed" value="true" />
+      <created>1765958885911</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1765958885911</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Tablero Modificado">
+      <option name="closed" value="true" />
+      <created>1765962946341</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765962946342</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Tablero Vacio:">
+      <option name="closed" value="true" />
+      <created>1766041355956</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1766041355956</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Tablero con Peones ya colocados">
+      <option name="closed" value="true" />
+      <created>1766042166902</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1766042166902</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Tablero con Peones ya colocados">
+      <option name="closed" value="true" />
+      <created>1766042448350</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1766042448350</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Caballo.java añadido">
+      <option name="closed" value="true" />
+      <created>1766043548876</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1766043548876</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Caballo.java añadido">
+      <option name="closed" value="true" />
+      <created>1766045376876</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1766045376876</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Caballo.java añadido">
+      <option name="closed" value="true" />
+      <created>1766045441115</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1766045441115</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Caballo.java añadido completo">
+      <option name="closed" value="true" />
+      <created>1766045515701</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1766045515702</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Estoy pensando cositas" />
+    <MESSAGE value="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)" />
+    <MESSAGE value="Añadida la clase Tablero e iniclizadas todas las casillas como '.' para tener una imagen incicial del tablero :)" />
+    <MESSAGE value="Tablero Contruido" />
+    <MESSAGE value="Tablero Modificado" />
+    <MESSAGE value="Tablero Vacio:" />
+    <MESSAGE value="Tablero con Peones ya colocados" />
+    <MESSAGE value="Caballo.java añadido" />
+    <MESSAGE value="Caballo.java añadido completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Caballo.java añadido completo" />
+  </component>
+</project>
