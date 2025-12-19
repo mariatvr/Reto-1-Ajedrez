@@ -26,6 +26,26 @@ public class Tablero {
         this.tablero[p.getFila()][p.getColumna()] = pieza;
     }
 
+    public boolean jaque(Posicion p, boolean blanca){
+        boolean jaque=false;
+        int cont=0;
+        Pieza amenazas[]=new Pieza[15];
+
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (this.tablero[i][j].getBlancas()!=blanca){
+                        if(this.tablero[i][j].compMov(this,p)){
+                            jaque= true;
+                            amenazas[cont]=this.tablero[i][j];
+                            cont++;
+                        }
+                    }
+                }
+            }
+
+        return jaque;
+    }
+
     @Override
     public String toString() {
 
