@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Añadida la clase Tablero e iniclizadas todas las casillas como '.' para tener una imagen incicial del tablero :)">
+    <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Actualizo detalles de Main.java y Torre.java, en principio por el momento ya están bien.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Torre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Torre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tablero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tablero.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +32,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/mariatvr/Reto-1-Ajedrez.git&quot;,
     &quot;accountId&quot;: &quot;61e510a5-92ba-4117-ab44-0be09298e9fe&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;mariatvr&quot;,
+    &quot;repository&quot;: &quot;Reto-1-Ajedrez&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -42,16 +52,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Tablero.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;mariate&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Tablero.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "mariate",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -77,7 +87,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765878730075</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Actualizo detalles de Main.java y Torre.java, en principio por el momento ya están bien.">
+      <option name="closed" value="true" />
+      <created>1766047599284</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1766047599284</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,6 +113,7 @@
     <MESSAGE value="Estoy pensando cositas" />
     <MESSAGE value="Añadido tablero y inicializadas todas las posiciones a '.' para tener una primera imagen del tablero :)" />
     <MESSAGE value="Añadida la clase Tablero e iniclizadas todas las casillas como '.' para tener una imagen incicial del tablero :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Añadida la clase Tablero e iniclizadas todas las casillas como '.' para tener una imagen incicial del tablero :)" />
+    <MESSAGE value="Actualizo detalles de Main.java y Torre.java, en principio por el momento ya están bien." />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualizo detalles de Main.java y Torre.java, en principio por el momento ya están bien." />
   </component>
 </project>

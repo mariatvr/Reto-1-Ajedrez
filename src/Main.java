@@ -13,8 +13,45 @@ public class Main {
     Imprimir nuevo tablero si válido.
     */
 
-    public static void jugadorInicial(){
+    private static Posicion localizarRey(Tablero miTablero, boolean esBlanca) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Pieza pieza = miTablero.getTablero()[i][j];
 
+                if (pieza != null) {
+                    boolean esRey = pieza.getClass().getSimpleName().equalsIgnoreCase("Rey");
+
+                    if (esRey && pieza.getBlancas() == esBlanca) {
+                        return new Posicion(i, j);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static String jugadorInicial(Tablero miTablero){
+        String inicia = "";
+        Scanner sc = new Scanner(System.in);
+
+        //Buscamos al Rey blanco y comprobamos jaque
+        Posicion posReyBlanco = localizarRey(miTablero, true);
+        boolean jaqueBlanco = miTablero.jaque(posReyBlanco, true);
+
+        //Buscamos al Rey negro y comprobamos jaque
+        Posicion posReyNegro = localizarRey(miTablero, false);
+        boolean jaqueNegro = miTablero.jaque(posReyBlanco, false);
+
+
+        if (jaqueBlanco){
+            System.out.println("Inician blancas.");
+        } else if (jaqueNegro){
+            System.out.println("Inician negras.");
+        } else {
+            System.out.print("Introduce quién quieres que inicie (blancas/negras): ");
+            inicia=sc.nextLine();
+        }
+        return inicia;
     }
 
     public static void pidoMovimiento(){
