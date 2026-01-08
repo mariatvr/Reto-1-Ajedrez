@@ -7,12 +7,11 @@ public class Tablero {
     }
 
     public void colocarPiezas (String posicion, boolean blancas){
-
     }
 
     /**
-    Esta función determina si el camino está despejado desde una posición inicial p1 hasta
-    **/
+     Esta función determina si el camino está despejado desde una posición inicial p1 hasta
+     **/
     public boolean caminoLibre (Posicion p1, Posicion p2, int dir){
         boolean libre = true;
 
@@ -27,8 +26,57 @@ public class Tablero {
         this.tablero[p.getFila()][p.getColumna()] = pieza;
     }
 
+    public boolean jaque(Posicion p, boolean blanca){
+        boolean jaque=false;
+        int cont=0;
+        Pieza amenazas[]=new Pieza[15];
+
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (this.tablero[i][j].getBlancas()!=blanca){
+                        if(this.tablero[i][j].compMov(this,p)){
+                            jaque= true;
+                            amenazas[cont]=this.tablero[i][j];
+                            cont++;
+                        }
+                    }
+                }
+            }
+
+        return jaque;
+    }
+
     @Override
     public String toString() {
-        return "Printea";
+
+        StringBuilder sb = new StringBuilder();
+
+        // Recorremos todas las filas del tablero (0 a 7)
+        for (int fila = 0; fila < 8; fila++) {
+
+            // Recorremos todas las columnas de la fila actual
+            for (int col = 0; col < 8; col++) {
+
+                // Si no hay pieza en la posición, imprimimos un símbolo alternado para casillas
+                if (tablero[fila][col] == null) {
+
+                    if ((fila + col) % 2 == 0) {
+                        sb.append("□ "); // Casilla clara
+                    } else {
+                        sb.append("■ "); // Casilla oscura
+                    }
+                } else {
+                    // Si hay una pieza, llamamos a su toString() para mostrarla
+                    sb.append(tablero[fila][col].toString() + " ");
+                }
+            }
+
+            // Después de cada fila, agregamos un salto de línea para pasar a la siguiente
+            sb.append("\n");
+        }
+        return sb.toString();
     }
+
+
+
 }

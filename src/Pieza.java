@@ -35,13 +35,30 @@ public abstract class Pieza {
         return this.blancas;
     }
 
+    public Posicion getPosicion(){return this.p;}
+
+    /**
+     * Comprueba el movimiento de la pieza según las reglas básicas:
+     *
+     * @param t tablero donde se efectúa el movimiento
+     * @param p posición destino
+     * @return true si el movimiento es válido,
+     * false en caso contrario
+     */
+    public abstract boolean compMov(Tablero t, Posicion p);
+
     /**
      * Intenta mover la pieza a una nueva posición en el tablero.
      *
      * @param t tablero sobre el que se realiza el movimiento
      * @param p posición destino
-     * @return true si el movimiento es válido y se realiza,
-     *         false en caso contrario
+     * @return si el movimiento es valido lo realiza.
      */
-    public abstract boolean mover(Tablero t, Posicion p);
+    public void mover(Tablero t, Posicion p){
+        if(compMov(t,p)){
+            this.p = p;
+            t.setPieza(null,this.p); //Elimina la ficha de su posición inicial
+            t.setPieza(this, p); //Coloca la ficha en el tablero
+        }
+    }
 }
