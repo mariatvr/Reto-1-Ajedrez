@@ -70,4 +70,9 @@ private boolean comprobarDiagonal(Posicion p) {
     }
 }
 
+@Override
+public String toString() {
+    return blancas ? "♕" : "♛";
+}
+
 }
