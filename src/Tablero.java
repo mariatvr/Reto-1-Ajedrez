@@ -7,6 +7,7 @@ public class Tablero {
     }
 
     public void colocarPiezas (String posicion, boolean blancas){
+
     }
 
     /**
@@ -16,6 +17,10 @@ public class Tablero {
         boolean libre = true;
 
         return libre;
+    }
+
+    public Pieza[][] getTablero() {
+        return this.tablero;
     }
 
     public Pieza getPosicion(Posicion p) {
@@ -48,7 +53,7 @@ public class Tablero {
 
     @Override
     public String toString() {
-
+        // StringBuilder se usa para construir el String
         StringBuilder sb = new StringBuilder();
 
         // Recorremos todas las filas del tablero (0 a 7)
@@ -76,7 +81,6 @@ public class Tablero {
         }
         return sb.toString();
     }
-
 
 
 }
