@@ -74,10 +74,10 @@ public class Peon extends Pieza{
                     else if (p.comprobarColumna(this.p.getColumna() + 1) || p.comprobarColumna(this.p.getColumna() - 1)) {
 
                         //Hay una pieza en la casilla a la que se mueve
-                        if (t.getPosicion(p) != null)
+                        if (destino != null)
 
                             //La ficha es del otro bando
-                            if (t.getPosicion(p).getBlancas() != this.blancas) {
+                            if (destino.getBlancas() != this.blancas) {
 
                                 //Movimiento permitido
                                 valido = true;
