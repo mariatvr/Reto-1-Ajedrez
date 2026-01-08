@@ -30,56 +30,59 @@ public class Peon extends Pieza{
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
         int dir;
+        int destino = t.getPosicion(p);
 
-        if (this.blancas){
-            // Comprobación de avance una fila hacia delante
-            if(p.comprobarFila(this.p.getFila()+1)){
+        if(p.dentroTablero()){
+            if (this.blancas) {
+                // Comprobación de avance una fila hacia delante
+                if (p.comprobarFila(this.p.getFila() + 1)) {
 
-                // Movimiento recto sin captura
-                if(p.comprobarColumna(this.p.getColumna())&& t.caminoLibre(this.p,p,0)) {
+                    // Movimiento recto sin captura
+                    if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
 
-                    //Movimiento permitido
-                    valido = true;
-                }
+                        //Movimiento permitido
+                        valido = true;
+                    }
 
-                // Captura en diagonal
-                else if(p.comprobarColumna(this.p.getColumna()+1)||p.comprobarColumna(this.p.getColumna()-1)){
+                    // Captura en diagonal
+                    else if (p.comprobarColumna(this.p.getColumna() + 1) || p.comprobarColumna(this.p.getColumna() - 1)) {
 
-                    //Hay una pieza en la casilla a la que se mueve
-                    if(t.getPosicion(p)!=null)
+                        //Hay una pieza en la casilla a la que se mueve
+                        if (destino != null)
 
-                        //La ficha es del otro bando
-                        if(t.getPosicion(p).getBlancas()!=this.blancas) {
+                            //La ficha es del otro bando
+                            if (destino.getBlancas() != this.blancas) {
 
-                            //Movimiento permitido
-                            valido = true;
-                        }
+                                //Movimiento permitido
+                                valido = true;
+                            }
+                    }
                 }
             }
-        }
-        esle {
-            // Comprobación de avance una fila hacia delante
-            if (p.comprobarFila(this.p.getFila() - 1)) {
+            esle {
+                // Comprobación de avance una fila hacia delante
+                if (p.comprobarFila(this.p.getFila() - 1)) {
 
-                // Movimiento recto sin captura
-                if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
+                    // Movimiento recto sin captura
+                    if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
 
-                    //Movimiento permitido
-                    valido = true;
-                }
+                        //Movimiento permitido
+                        valido = true;
+                    }
 
-                // Captura en diagonal
-                else if (p.comprobarColumna(this.p.getColumna() + 1) || p.comprobarColumna(this.p.getColumna() - 1)) {
+                    // Captura en diagonal
+                    else if (p.comprobarColumna(this.p.getColumna() + 1) || p.comprobarColumna(this.p.getColumna() - 1)) {
 
-                    //Hay una pieza en la casilla a la que se mueve
-                    if (t.getPosicion(p) != null)
+                        //Hay una pieza en la casilla a la que se mueve
+                        if (t.getPosicion(p) != null)
 
-                        //La ficha es del otro bando
-                        if (t.getPosicion(p).getBlancas() != this.blancas) {
+                            //La ficha es del otro bando
+                            if (t.getPosicion(p).getBlancas() != this.blancas) {
 
-                            //Movimiento permitido
-                            valido = true;
-                        }
+                                //Movimiento permitido
+                                valido = true;
+                            }
+                    }
                 }
             }
         }

@@ -34,10 +34,11 @@ public class Rey extends Pieza{
     @Override
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
+        int destino = t.getPosicion(p);
 
         if(p.dentroTablero()){
-            if(t.getPosicion(p)!=null){
-                if(t.getPosicion(p).getBlancas()!=this.getBlancas()){
+            if(destino!=null){
+                if(destino.getBlancas()!=this.getBlancas()){
                     if(!t.jaque(p,this.blancas)){
                        valido=true;
                     }
