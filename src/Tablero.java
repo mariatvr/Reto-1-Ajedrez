@@ -51,36 +51,7 @@ public class Tablero {
         return jaque;
     }
 
-    @Override
-    public String toString() {
 
-        StringBuilder sb = new StringBuilder();
-
-        // Recorremos todas las filas del tablero (0 a 7)
-        for (int fila = 0; fila < 8; fila++) {
-
-            // Recorremos todas las columnas de la fila actual
-            for (int col = 0; col < 8; col++) {
-
-                // Si no hay pieza en la posición, imprimimos un símbolo alternado para casillas
-                if (tablero[fila][col] == null) {
-
-                    if ((fila + col) % 2 == 0) {
-                        sb.append("□ "); // Casilla clara
-                    } else {
-                        sb.append("■ "); // Casilla oscura
-                    }
-                } else {
-                    // Si hay una pieza, llamamos a su toString() para mostrarla
-                    sb.append(tablero[fila][col].toString() + " ");
-                }
-            }
-
-            // Después de cada fila, agregamos un salto de línea para pasar a la siguiente
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
 
 
 
@@ -93,7 +64,6 @@ public class Tablero {
      * "Rg1, Tf1, h2, Ce5, Ta1"
      */
     public void colocarPiezasDesdeNotacion(String entrada) {
-
 
         entrada = entrada.replace(" ", "");
 
@@ -189,6 +159,35 @@ public class Tablero {
         return true; // Devuelve true si no se encontró ninguna pieza bloqueando
     }
 
+    @Override
+    public String toString() {
 
+        StringBuilder sb = new StringBuilder();
+
+        // Recorremos todas las filas del tablero (0 a 7)
+        for (int fila = 0; fila < 8; fila++) {
+
+            // Recorremos todas las columnas de la fila actual
+            for (int col = 0; col < 8; col++) {
+
+                // Si no hay pieza en la posición, imprimimos un símbolo alternado para casillas
+                if (tablero[fila][col] == null) {
+
+                    if ((fila + col) % 2 == 0) {
+                        sb.append("□ "); // Casilla clara
+                    } else {
+                        sb.append("■ "); // Casilla oscura
+                    }
+                } else {
+                    // Si hay una pieza, llamamos a su toString() para mostrarla
+                    sb.append(tablero[fila][col].toString() + " ");
+                }
+            }
+
+            // Después de cada fila, agregamos un salto de línea para pasar a la siguiente
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 
 }

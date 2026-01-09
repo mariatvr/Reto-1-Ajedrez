@@ -43,9 +43,9 @@ import java.util.Scanner;
 
 
         if (jaqueBlanco){
-            System.out.println("Inician blancas."); //Podría igualarse inicia a blancas o negras según quien salga?
+            System.out.println("Mueven blancas."); //Podría igualarse inicia a blancas o negras según quien salga?
         } else if (jaqueNegro){
-            System.out.println("Inician negras.");
+            System.out.println("Mueven negras.");
         } else {
             System.out.print("Introduce quién quieres que inicie (blancas/negras): ");
             inicia=sc.nextLine();
@@ -161,7 +161,7 @@ import java.util.Scanner;
         return valido;
     }
 
-    public static void pidoMovimiento(){
+    public static String pidoMovimiento(){
         String movimiento;
         String patron = "[TCARD]?[1-8]?[a-h][1-8]";
         //Hay un posible numero seguido de la mayúscula que indica la fila
@@ -181,6 +181,8 @@ import java.util.Scanner;
                 System.out.println("Formato incorrecto");
             }
         } while (valido);
+
+        return movimiento;
     }
 
     public static void main (String[] args){
@@ -188,52 +190,57 @@ import java.util.Scanner;
         Tablero tablero = new Tablero();
 
         Scanner scan = new Scanner(System.in);
-        String color;
-        boolean blancas = false;
+        String mueven;
+        boolean entradaCorrecta = true;
         String piezasB;
         String piezasN;
-        /*
-        Se le pregunta al usuario el color que empieza primero.
-         */
-
-        System.out.println("¿Qué color de piezas comienza a jugar? (Blancas/Negras)");
-
-         /*
-        El color para ver quién empieza a colocar las piezas.
-         */
-        color = scan.nextLine();
-
-       /*
-       Empiezan las blancas y luego las negras.
-        */
-        if (color.equalsIgnoreCase("Blancas")) {
-            blancas = true;
-            System.out.println("Introduce la posición inicial de piezas de color blanco:");
-            piezasB = scan.nextLine();
-
-            System.out.println("Introduce las posición inicial de piezas de color negro:");
-            piezasN = scan.nextLine();
-
-            /*
-            Si no empiezan blancas, empiezan las negras.
-             */
-        } else if (color.equalsIgnoreCase("Negras")){
-            blancas = false;
-            System.out.println("Introduce las posición inicial de piezas de color negro:");
-            piezasN = scan.nextLine();
-
-            System.out.println("Introduce la posición inicial de piezas de color blanco:");
-            piezasB = scan.nextLine();
-            /*
-            Si no coinciden los colores, muestra este mensaje.
-             */
-        } else {
-            System.out.println("Color introducido incorrecto.");
-        }
-        pidoMovimiento();
+        String movimiento;
 
         // Imprimir tablero
         System.out.println("Tablero Vacio:");
+        System.out.println(tablero);
+       /*
+       Se pide la entrada del tablero inicial
+        */
+            do {
+                System.out.println("Introduce la posición inicial de piezas de color blanco:");
+                piezasB = scan.nextLine();
+                entradaCorrecta=posicionIni(piezasB)
+
+            if (!entradaCorrecta) {
+                    System.out.println("Entrada no válida. El formato...");
+                }
+            }while (!entradaCorrecta);
+
+        do {
+            System.out.println("Introduce las posición inicial de piezas de color negro:");
+            piezasN = scan.nextLine();
+            entradaCorrecta=posicionIni(piezasB)
+
+            if (!entradaCorrecta) {
+                System.out.println("Entrada no válida. El formato...");
+            }
+        }while (!entradaCorrecta);
+
+        //comprobar tablero inicial correcto
+
+        /*inicializamos tablero*/
+        tablero.colocarPiezasDesdeNotacion(piezasB);
+        tablero.colocarPiezasDesdeNotacion(piezasN);
+
+        // Imprimir tablero
+        System.out.println("Tablero Vacio:");
+        System.out.println(tablero);
+
+        //Se establece quien mueve
+        mueven=jugadorInicial(tablero);
+
+        //Pedimos movimiento
+        movimiento=pidoMovimiento();
+
+        //Realizamos movimiento
+
+        // Imprimir tablero final
         System.out.println(tablero);
     }
 }
