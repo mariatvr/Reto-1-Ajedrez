@@ -1,12 +1,31 @@
-
+/**
+ * Representa la pieza Peón del juego de ajedrez.
+ * El peón puede avanzar una casilla hacia delante si está libre
+ * o capturar en diagonal una pieza del bando contrario.
+ */
 public class Peon extends Pieza{
 
-
+    /**
+     * Constructor de la clase Peon.
+     *
+     * @param p posición inicial del peón
+     * @param blancas true si el peón es blanco, false si es negro
+     */
     public Peon(Posicion p, boolean blancas) {
         super(p, blancas);
     }
 
-
+    /**
+     * Comprueba el movimiento del peón según las reglas básicas:
+     *   ·Avance de una o dos casillas (en caso de no haber movido aun)
+     *   hacia delante si está libre.
+     *   ·Captura en diagonal de una pieza enemiga.
+     *
+     * @param t tablero donde se efectúa el movimiento
+     * @param p posición destino
+     * @return true si el movimiento es válido,
+     *      * false en caso contrario
+     */
     @Override
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
