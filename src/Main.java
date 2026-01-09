@@ -43,7 +43,7 @@ import java.util.Scanner;
 
 
         if (jaqueBlanco){
-            System.out.println("Inician blancas.");
+            System.out.println("Inician blancas."); //Podría igualarse inicia a blancas o negras según quien salga?
         } else if (jaqueNegro){
             System.out.println("Inician negras.");
         } else {
@@ -56,19 +56,19 @@ import java.util.Scanner;
         /*
         Primero de todo, valida que no contiene símbolos antes de comprobar el String por trozos.
          */
-        boolean valido = false;
+        boolean valido = true;
         for (int i = 0; i < piezas.length(); i++) {
             char c = piezas.charAt(i);
             /*
             Si el caracter actual que recorre el string es una letra o un número es válido.
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
-            if (Character.isLetterOrDigit(c) || c == ' ') {
-                valido = true;
-            } else {
+            if (!Character.isLetterOrDigit(c) && c != ' ') {
                 valido = false;
+                break;
             }
         }
+
         String trozo = "";
         int ultChar = 0;
         for (int j = 0; j < piezas.length(); j++) {
@@ -149,16 +149,15 @@ import java.util.Scanner;
                 Si no, el formato introducido es inválido, por lo tanto el boolean valido es false.
                  */
             } else {
-                valido = false;
                 /*
                 Una vez que sea inválido, se acaba la comprobación y finaliza la función.
                  */
-                if (valido == false) {
-                    break;
-                }
+                valido = false;
+                break;
             }
             trozo = "";
         }
+
         return valido;
     }
 
