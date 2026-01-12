@@ -46,11 +46,11 @@ public class Main {
 
 
         if (jaqueBlanco){
-            System.out.println("Inician blancas.");
+            System.out.println("Mueven blancas.");
         } else if (jaqueNegro){
-            System.out.println("Inician negras.");
+            System.out.println("Mueven negras.");
         } else {
-            System.out.print("Introduce quién quieres que inicie (blancas/negras): ");
+            System.out.print("Introduce quién quieres que mueva (blancas/negras): ");
             inicia=sc.nextLine();
         }
         return inicia;
