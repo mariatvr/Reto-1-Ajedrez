@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-/*
+public class Main {
+    /*
     Pedir entrada Blancas/Negras y guardarlo como strings.
     Generar tablero y pasarle los strings.
     Comprobar si tablero válido.
@@ -185,7 +186,52 @@ import java.util.Scanner;
         return movimiento;
     }
 
-    public static void main (String[] args){
+    //Función que comprueba que solo hay 1 rey y que hay 8 peones o menos, y que ninguno está en las filas 1 ni 8
+    public static boolean piezasCorrectas(String entrada) {
+        boolean valido = true;
+
+        // 1. Comprobación de que haya EXACTAMENTE 1 Rey
+        int reyes = entrada.length() - entrada.replace("R", "").length();
+        if (reyes != 1) {
+            System.out.println("Error: Debe haber exactamente 1 rey (encontrados: " + reyes + ").");
+            valido = false;
+        }
+
+        // 2. Comprobación de Peones (Solo si el rey está bien)
+        if (valido) {
+            valido = validarPeones(entrada, 8);
+        }
+
+        return valido;
+    }
+
+    private static boolean validarPeones(String entrada, int max) {
+        // Patrón para detectar peones en filas prohibidas (1 y 8)
+        Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
+        if (filaProhibida.matcher(entrada).find()) {
+            System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
+            return false;
+        }
+
+        // Patrón para contar peones válidos (filas 2 a 7)
+        Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
+        Matcher m = p.matcher(entrada);
+
+        int contador = 0;
+        while (m.find()) {
+            contador++;
+        }
+
+        if (contador > max) {
+            System.out.println("Error: No puede haber más de " + max + " peones. Detectados: " + contador);
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public static void main (String[]args){
 
         Tablero tablero = new Tablero();
 
