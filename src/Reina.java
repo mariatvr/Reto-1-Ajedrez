@@ -25,14 +25,12 @@ public boolean compMov(Tablero t, Posicion p) {
              */
 
         if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
-            valido = true;
 
                 /*
             Si se puede mover en diagonales.
                 */
 
-            if (comprobarDiagonal(p) && t.caminoLibre(this.p, p, 0)) {
-                valido = true
+            if(comprobarDiagonal(p) && t.caminoLibre(this.p, p, 0)) {
             }
         }
     }
@@ -44,11 +42,9 @@ public boolean compMov(Tablero t, Posicion p) {
         /*
         Si no hay pieza en la posición de destino o la pieza es de otro color, entonces la Reina puede moverse
         */
-        if (t.getPosicion(p) == null || p.getBlancas() != this.blancas) {
-            t.setPieza(this.pieza, p);
+        if (t.getPieza(p) == null || t.getPieza(p).getBlancas() != this.blancas) {
+            t.setPieza(this, p);
         }
-    }
-
     }
 
     return valido;
@@ -62,17 +58,18 @@ public boolean compMov(Tablero t, Posicion p) {
 private boolean comprobarDiagonal(Posicion p) {
     boolean valido = false;
 
-    int difx = Math.abs(p.getFila - this.p.getFila);
-    int dify = Math.abs(p.getColumna - this.p.getColumna);
+    int difx = Math.abs(p.getFila() - this.p.getFila());
+    int dify = Math.abs(p.getColumna() - this.p.getColumna());
 
     if (difx == dify) {
         valido = true;
     }
+
+    return valido;
 }
 
 @Override
 public String toString() {
     return blancas ? "♕" : "♛";
 }
-
 }

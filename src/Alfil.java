@@ -1,18 +1,15 @@
 public class Alfil extends Pieza {
 
-    public Alfil(Posicion posicion) {
-        super(posicion);
+    public Alfil(Posicion p, boolean blancas) {
+        super(p, blancas);
     }
-
-
     @Override
-    public boolean movimientoValido(Posicion destino) {
+    public boolean compMov(Tablero t, Posicion p) {
 
-        int filaOrigen = posicion.getFila();      // Fila actual del alfil
-        int colOrigen = posicion.getColumna();    // Columna actual del alfil
-        int filaDestino = destino.getFila();      // Fila destino
-        int colDestino = destino.getColumna();    // Columna destino
-
+        int filaOrigen = this.p.getFila();      // Fila actual del alfil
+        int colOrigen = this.p.getColumna();    // Columna actual del alfil
+        int filaDestino = p.getFila();      // Fila destino
+        int colDestino = p.getColumna();    // Columna destino
         int difFila = filaDestino - filaOrigen;   // Diferencia de filas
         int difCol = colDestino - colOrigen;      // Diferencia de columnas
 
@@ -29,5 +26,4 @@ public class Alfil extends Pieza {
     public String toString() {
         return blancas ? "♗" : "♝";
     }
-}
 }
