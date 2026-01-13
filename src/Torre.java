@@ -10,7 +10,7 @@ public class Torre extends Pieza {
     }
 
     @Override
-    public boolean mover(Tablero t, Posicion p) {
+    public boolean compMov(Tablero t, Posicion p) {
         boolean valido = false;
         boolean mueve=false;
 

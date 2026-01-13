@@ -17,9 +17,9 @@ public class Rey extends Pieza{
      * @param p posición inicial del Rey
      * @param blancas true si el Rey es blanco, false si es negro
      */
-    public Rey(Posicion p, boolean blancas, boolean enroque) {
+    public Rey(Posicion p, boolean blancas) {
         super(p, blancas);
-        this.enroque=enroque;
+        //this.enroque=enroque;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Rey extends Pieza{
     @Override
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
-        int destino = t.getPosicion(p);
+        Pieza destino = t.getPosicion(p);
 
         if(p.dentroTablero()){
             if(destino!=null){

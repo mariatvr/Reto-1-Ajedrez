@@ -30,7 +30,7 @@ public class Peon extends Pieza{
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
         int dir;
-        int destino = t.getPosicion(p);
+        Pieza destino = t.getPosicion(p);
 
         if(p.dentroTablero()){
             if (this.blancas) {
@@ -59,7 +59,7 @@ public class Peon extends Pieza{
                     }
                 }
             }
-            esle {
+            else {
                 // Comprobación de avance una fila hacia delante
                 if (p.comprobarFila(this.p.getFila() - 1)) {
 

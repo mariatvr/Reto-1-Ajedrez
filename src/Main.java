@@ -32,7 +32,7 @@ public class Main {
         return null;
     }
 
-    public static String jugadorInicial(Tablero miTablero){
+    public static String jugadorInicial(Tablero miTablero) {
         String inicia = "";
         Scanner sc = new Scanner(System.in);
 
@@ -45,33 +45,34 @@ public class Main {
         boolean jaqueNegro = miTablero.jaque(posReyBlanco, false);
 
 
-        if (jaqueBlanco){
-            System.out.println("Mueven blancas."); //Podría igualarse inicia a blancas o negras según quien salga?
-        } else if (jaqueNegro){
+        if (jaqueBlanco) {
+            System.out.println("Mueven blancas.");
+        } else if (jaqueNegro) {
             System.out.println("Mueven negras.");
         } else {
-            System.out.print("Introduce quién quieres que inicie (blancas/negras): ");
-            inicia=sc.nextLine();
+            System.out.print("Introduce quién quieres que mueva (blancas/negras): ");
+            inicia = sc.nextLine();
         }
         return inicia;
     }
+
     public static boolean posicionIni(String piezas) {
         /*
         Primero de todo, valida que no contiene símbolos antes de comprobar el String por trozos.
          */
-        boolean valido = true;
+        boolean valido = false;
         for (int i = 0; i < piezas.length(); i++) {
             char c = piezas.charAt(i);
             /*
             Si el caracter actual que recorre el string es una letra o un número es válido.
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
-            if (!Character.isLetterOrDigit(c) && c != ' ') {
+            if (Character.isLetterOrDigit(c) || c == ' ') {
+                valido = true;
+            } else {
                 valido = false;
-                break;
             }
         }
-
         String trozo = "";
         int ultChar = 0;
         for (int j = 0; j < piezas.length(); j++) {
@@ -79,7 +80,7 @@ public class Main {
             /*
             Se "trocea" el string para validar cada uno de los trozos.
              */
-            for (;ultChar < piezas.length(); ultChar++) {
+            for (; ultChar < piezas.length(); ultChar++) {
                 char c = piezas.charAt(ultChar);
                 /*
                 Si contiene un espacio el caracter actual, se almacena el trozo de una pieza y del movimiento.
@@ -152,26 +153,27 @@ public class Main {
                 Si no, el formato introducido es inválido, por lo tanto el boolean valido es false.
                  */
             } else {
+                valido = false;
                 /*
                 Una vez que sea inválido, se acaba la comprobación y finaliza la función.
                  */
-                valido = false;
-                break;
+                if (valido == false) {
+                    break;
+                }
             }
             trozo = "";
         }
-
         return valido;
     }
 
-    public static String pidoMovimiento(){
+    public static String pidoMovimiento() {
         String movimiento;
         String patron = "[TCARD]?[1-8]?[a-h][1-8]";
         //Hay un posible numero seguido de la mayúscula que indica la fila
         // de la figura que queremos mover en caso de que haya otra de
         // su mismo tipo en esa misma columna.
 
-        boolean valido=true;
+        boolean valido = true;
         Scanner sc = new Scanner(System.in);
         do {
             System.out.print("Introduce tu próximo movimiento: ");
@@ -179,7 +181,7 @@ public class Main {
 
             if (movimiento.matches(patron)) {
                 System.out.println("Formato válido");
-                valido=false;
+                valido = false;
             } else {
                 System.out.println("Formato incorrecto");
             }
@@ -201,13 +203,13 @@ public class Main {
 
         // 2. Comprobación de Peones (Solo si el rey está bien)
         if (valido) {
-            valido = validarPeones(entrada, 8);
+            valido = validarPeones(entrada);
         }
 
         return valido;
     }
 
-    private static boolean validarPeones(String entrada, int max) {
+    private static boolean validarPeones(String entrada) {
         // Patrón para detectar peones en filas prohibidas (1 y 8)
         Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
         if (filaProhibida.matcher(entrada).find()) {
@@ -224,8 +226,8 @@ public class Main {
             contador++;
         }
 
-        if (contador > max) {
-            System.out.println("Error: No puede haber más de " + max + " peones. Detectados: " + contador);
+        if (contador > 8) {
+            System.out.println("Error: No puede haber más de " + 8 + " peones. Detectados: " + contador);
             return false;
         }
 
@@ -233,7 +235,7 @@ public class Main {
     }
 
 
-    public static void main (String[]args){
+    public static void main(String[] args) {
 
         Tablero tablero = new Tablero();
 
@@ -250,41 +252,41 @@ public class Main {
        /*
        Se pide la entrada del tablero inicial
         */
-            do {
-                System.out.println("Introduce la posición inicial de piezas de color blanco:");
-                piezasB = scan.nextLine();
-                entradaCorrecta=posicionIni(piezasB)
-
-            if (!entradaCorrecta) {
-                    System.out.println("Entrada no válida. El formato...");
-                }
-            }while (!entradaCorrecta);
-
         do {
-            System.out.println("Introduce las posición inicial de piezas de color negro:");
-            piezasN = scan.nextLine();
-            entradaCorrecta=posicionIni(piezasB)
+            System.out.println("Introduce la posición inicial de piezas de color blanco:");
+            piezasB = scan.nextLine();
+            entradaCorrecta = posicionIni(piezasB);
 
             if (!entradaCorrecta) {
                 System.out.println("Entrada no válida. El formato...");
             }
-        }while (!entradaCorrecta);
+        } while (!entradaCorrecta);
+
+        do {
+            System.out.println("Introduce las posición inicial de piezas de color negro:");
+            piezasN = scan.nextLine();
+            entradaCorrecta = posicionIni(piezasN);
+
+            if (!entradaCorrecta) {
+                System.out.println("Entrada no válida. El formato...");
+            }
+        } while (!entradaCorrecta);
 
         //comprobar tablero inicial correcto
 
         /*inicializamos tablero*/
-        tablero.colocarPiezasDesdeNotacion(piezasB);
-        tablero.colocarPiezasDesdeNotacion(piezasN);
+        tablero.colocarPiezasDesdeNotacion(piezasB, true);
+        tablero.colocarPiezasDesdeNotacion(piezasN, false);
 
         // Imprimir tablero
         System.out.println("Tablero Vacio:");
         System.out.println(tablero);
 
         //Se establece quien mueve
-        mueven=jugadorInicial(tablero);
+        mueven = jugadorInicial(tablero);
 
         //Pedimos movimiento
-        movimiento=pidoMovimiento();
+        movimiento = pidoMovimiento();
 
         //Realizamos movimiento
 

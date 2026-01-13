@@ -6,55 +6,6 @@ public class Tablero {
         this.tablero= new Pieza[8][8];
     }
 
-    public void colocarPiezas (String posicion, boolean blancas){
-
-    }
-
-    /**
-     Esta función determina si el camino está despejado desde una posición inicial p1 hasta
-     **/
-    public boolean caminoLibre (Posicion p1, Posicion p2, int dir){
-        boolean libre = true;
-
-        return libre;
-    }
-
-    public Pieza[][] getTablero() {
-        return this.tablero;
-    }
-
-    public Pieza getPosicion(Posicion p) {
-        return tablero[p.getFila()][p.getColumna()];
-    }
-
-    public void setPieza(Pieza pieza, Posicion p) {
-        this.tablero[p.getFila()][p.getColumna()] = pieza;
-    }
-
-    public boolean jaque(Posicion p, boolean blanca){
-        boolean jaque=false;
-        int cont=0;
-        Pieza amenazas[]=new Pieza[15];
-
-            for (int i = 0; i < 7; i++) {
-                for (int j = 0; j < 7; j++) {
-                    if (this.tablero[i][j].getBlancas()!=blanca){
-                        if(this.tablero[i][j].compMov(this,p)){
-                            jaque= true;
-                            amenazas[cont]=this.tablero[i][j];
-                            cont++;
-                        }
-                    }
-                }
-            }
-
-        return jaque;
-    }
-
-
-
-
-
     //Comprueba la posicion inicial
     /**
      * Coloca piezas en el tablero a partir de una cadena en notación algebraica.
@@ -63,7 +14,8 @@ public class Tablero {
      * Ejemplo:
      * "Rg1, Tf1, h2, Ce5, Ta1"
      */
-    public void colocarPiezasDesdeNotacion(String entrada) {
+    public void colocarPiezasDesdeNotacion(String entrada, boolean blancas) {
+
 
         entrada = entrada.replace(" ", "");
 
@@ -111,19 +63,19 @@ public class Tablero {
             Pieza pieza;
             switch (tipo) {
                 case 'R':
-                    pieza = new Rey(pos);
+                    pieza = new Rey(pos, blancas);
                     break;
                 case 'T':
-                    pieza = new Torre(pos);
+                    pieza = new Torre(pos, blancas);
                     break;
                 case 'C':
-                    pieza = new Caballo(pos);
+                    pieza = new Caballo(pos, blancas);
                     break;
                 case 'A':
-                    pieza = new Alfil(pos);
+                    pieza = new Alfil(pos, blancas);
                     break;
                 case 'P':
-                    pieza = new Peon(pos);
+                    pieza = new Peon(pos, blancas);
                     break;
                 default:
                     throw new IllegalArgumentException("Tipo de pieza desconocido: " + tipo);
@@ -134,15 +86,10 @@ public class Tablero {
         }
     }
 
-
-
-
-    //movimiento libre
-
     /**
      * Comprueba si el camino entre dos posiciones está libre de piezas.
      */
-    public boolean caminoDespejado(Posicion inicio, Posicion fin, int dirFila, int dirCol) {
+    public boolean caminoLibre(Posicion inicio, Posicion fin, int dirFila, int dirCol) {
 
         int filaActual = inicio.getFila() + dirFila;
         int colActual = inicio.getColumna() + dirCol;
@@ -159,9 +106,41 @@ public class Tablero {
         return true; // Devuelve true si no se encontró ninguna pieza bloqueando
     }
 
+    public Pieza[][] getTablero() {
+        return this.tablero;
+    }
+
+    public Pieza getPosicion(Posicion p) {
+        return tablero[p.getFila()][p.getColumna()];
+    }
+
+    public void setPieza(Pieza pieza, Posicion p) {
+        this.tablero[p.getFila()][p.getColumna()] = pieza;
+    }
+
+    public boolean jaque(Posicion p, boolean blanca){
+        boolean jaque=false;
+        int cont=0;
+        Pieza amenazas[]=new Pieza[15];
+
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (this.tablero[i][j].getBlancas()!=blanca){
+                        if(this.tablero[i][j].compMov(this,p)){
+                            jaque= true;
+                            amenazas[cont]=this.tablero[i][j];
+                            cont++;
+                        }
+                    }
+                }
+            }
+
+        return jaque;
+    }
+
     @Override
     public String toString() {
-
+        // StringBuilder se usa para construir el String
         StringBuilder sb = new StringBuilder();
 
         // Recorremos todas las filas del tablero (0 a 7)
@@ -189,5 +168,6 @@ public class Tablero {
         }
         return sb.toString();
     }
+
 
 }

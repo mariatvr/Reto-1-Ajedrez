@@ -42,7 +42,7 @@ public boolean compMov(Tablero t, Posicion p) {
         /*
         Si no hay pieza en la posición de destino o la pieza es de otro color, entonces la Reina puede moverse
         */
-        if (t.getPieza(p) == null || t.getPieza(p).getBlancas() != this.blancas) {
+        if (t.getPosicion(p) == null || t.getPosicion(p).getBlancas() != this.blancas) {
             t.setPieza(this, p);
         }
     }
