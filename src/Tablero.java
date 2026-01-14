@@ -74,8 +74,11 @@ public class Tablero {
                 case 'A':
                     pieza = new Alfil(pos, blancas);
                     break;
+                case 'D':
+                    pieza = new Reina(pos, blancas);
+                    break;
                 case 'P':
-                    pieza = new Peon(pos, blancas);
+                    pieza = new Reina(pos, blancas);
                     break;
                 default:
                     throw new IllegalArgumentException("Tipo de pieza desconocido: " + tipo);

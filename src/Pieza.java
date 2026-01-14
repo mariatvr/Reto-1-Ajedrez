@@ -56,9 +56,11 @@ public abstract class Pieza {
      */
     public void mover(Tablero t, Posicion p){
         if(compMov(t,p)){
+            Posicion pAnterior = this.p;
             this.p = p;
-            t.setPieza(null,this.p); //Elimina la ficha de su posición inicial
-            t.setPieza(this, p); //Coloca la ficha en el tablero
+
+            t.setPieza(null,pAnterior); //Elimina la ficha de su posición inicial
+            t.setPieza(this, this.p); //Coloca la ficha en el tablero
         }
     }
 }
