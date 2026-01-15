@@ -10,11 +10,15 @@ Blancas: Tb2, c3, Rc1, Dd1, e3, Ce2, Cd2, Af1, f2
 
 Negras: Ce6, f7, Rd7, Dc8, Ab8, Ta8, a7, Th8, c7
 
+mueve alfil negro a una posición incorrecta
+
 //2 (CORRECTO)
 
 Blancas: Ta2, f5, Rc1, Dd1, c4, Cb3, Af1, a4, Th1
 
 Negras: Tb6, c6, Dd8, Rc8, Cd7, Af8, g5, Th8, Ch6
+
+mueve reina blanca a una posición correcta
 
 // -- FORMATO CORRECTO PERO POSICIONES INVÁLIDAS O 2 PIEZAS QUE NO PUEDEN REPETIRSE (REY, DAMA) --
 
@@ -78,10 +82,14 @@ Blancas: Th1, Cb1, Ce4, Ac1, Dd1, Re1, a3, c3, e3, g3
 
 Negras: Tg8, Cb8, Cg8, Ac8, Dd8, Rd6, a6, b6, e6, f6
 
+mueve el rey blanco de forma incorrecta
+
 //12 (CORRECTO: PIEZA REY DE COLOR NEGRO EN JAQUE, PERO HAY CONFLICTO ENTRE 2 CABALLOS, POR EJEMPLO (2 CABALLOS AMENAZAN AL REY))
 
 Blancas: Th1, Cc4, Ce4, Ac1, Dd1, Re1, a3, c3, e3, g3
 
 Negras: Tg8, Cb8, Cg8, Ac8, Dd8, Rd6, a6, b6, e6, f6
+
+mueve el rey blanco.
 
 */

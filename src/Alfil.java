@@ -5,21 +5,22 @@ public class Alfil extends Pieza {
     }
     @Override
     public boolean compMov(Tablero t, Posicion p) {
+        boolean valido = false;
 
-        int filaOrigen = this.p.getFila();      // Fila actual del alfil
-        int colOrigen = this.p.getColumna();    // Columna actual del alfil
-        int filaDestino = p.getFila();      // Fila destino
-        int colDestino = p.getColumna();    // Columna destino
-        int difFila = filaDestino - filaOrigen;   // Diferencia de filas
-        int difCol = colDestino - colOrigen;      // Diferencia de columnas
+        int df = p.getFila() - this.p.getFila();
+        int dc = p.getColumna() - this.p.getColumna();
 
-        // Evita que el alfil se quede en la misma casilla
-        if (difFila == 0 && difCol == 0) {
-            return false;
+        int dirFila = Integer.compare(df, 0);   // -1, 0 o +1
+        int dirCol  = Integer.compare(dc, 0);
+
+        if (Math.abs(df)==Math.abs(dc)){
+            if (t.caminoLibre(this.p, p, dirFila,dirCol)) {
+            // Evita que el alfil se quede en la misma casilla
+                valido=true;
+            }
         }
 
-        // El alfil solo se mueve en diagonal
-        return Math.abs(difFila) == Math.abs(difCol);
+        return valido;
     }
 
     @Override

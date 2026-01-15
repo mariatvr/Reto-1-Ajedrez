@@ -12,69 +12,27 @@ public class Reina extends Pieza{
      */
 public boolean compMov(Tablero t, Posicion p) {
     boolean valido = false;
-    int fila = this.p.getFila()-p.getFila();
-    int columna = this.p.getColumna()-p.getColumna();
 
-    if(fila!=0){
-        fila=Math.abs(fila)/fila;
-    } else fila=0;
-    if(columna!=0){
-        columna=Math.abs(columna)/columna;
-    }  else columna=0;
+    int df = p.getFila() - this.p.getFila();
+    int dc = p.getColumna() - this.p.getColumna();
+
+    int dirFila = Integer.compare(df, 0);   // -1, 0 o +1
+    int dirCol  = Integer.compare(dc, 0);
         /*
         Si se puede mover en horizontal.
          */
 
-    if (p.comprobarFila(this.p.getFila()) && t.caminoLibre(this.p, p, fila,columna)) {
-        valido = true;
-
-            /*
-            Si se puede mover en vertical.
-             */
-
-        if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, fila,columna)) {
-
-                /*
-            Si se puede mover en diagonales.
-                */
-
-            if(comprobarDiagonal(p) && t.caminoLibre(this.p, p, fila,columna)) {
+    if (t.caminoLibre(this.p, p, dirFila,dirCol)) {
+        if(dirFila == 0 || dirCol == 0 || Math.abs(df)==Math.abs(dc)) {
+            if (t.getPosicion(p) == null || t.getPosicion(p).getBlancas() != this.blancas) {
+                valido=true;
             }
         }
     }
 
-    /*
-    Si la comprobación del movimiento es válido, se comprueba que se puede mover.
-     */
-    if (valido) {
-        /*
-        Si no hay pieza en la posición de destino o la pieza es de otro color, entonces la Reina puede moverse
-        */
-        if (t.getPosicion(p) == null || t.getPosicion(p).getBlancas() != this.blancas) {
-            t.setPieza(this, p);
-        }
-    }
-
     return valido;
 }
 
-    /*
-    Para comprobar la diferencia entre la posición inicial y una final,
-    si la posición final coinciden los 2 números, se mueve en diagonal.
-     */
-
-private boolean comprobarDiagonal(Posicion p) {
-    boolean valido = false;
-
-    int difx = Math.abs(p.getFila() - this.p.getFila());
-    int dify = Math.abs(p.getColumna() - this.p.getColumna());
-
-    if (difx == dify) {
-        valido = true;
-    }
-
-    return valido;
-}
 
 @Override
 public String toString() {

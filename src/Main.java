@@ -371,7 +371,7 @@ public class Main {
         do {
             System.out.println("Introduce las posición inicial de piezas de color negro:");
             piezasN = scan.nextLine();
-            entradaCorrecta = posicionIni(piezasN)&piezasCorrectas(piezasB);
+            entradaCorrecta = posicionIni(piezasN)&piezasCorrectas(piezasN);
 
             if (!entradaCorrecta) {
                 System.out.println("Entrada no válida. El formato...");

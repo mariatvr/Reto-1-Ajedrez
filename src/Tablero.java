@@ -95,11 +95,13 @@ public class Tablero {
     public boolean caminoLibre(Posicion inicio, Posicion fin, int dirFila, int dirCol) {
 
         int filaActual = inicio.getFila() + dirFila;
+
         int colActual = inicio.getColumna() + dirCol;
+
 
         while (filaActual != fin.getFila() || colActual != fin.getColumna()) {
             if (tablero[filaActual][colActual] != null) {
-                return false;
+               return false;
             }
 
             filaActual += dirFila;
