@@ -1,7 +1,7 @@
 public class Alfil extends Pieza {
 
     public Alfil(Posicion p, boolean blancas) {
-        super(p, blancas);
+        super(p, blancas,'A');
     }
     @Override
     public boolean compMov(Tablero t, Posicion p) {

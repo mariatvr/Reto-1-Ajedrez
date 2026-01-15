@@ -12,7 +12,7 @@ public class Peon extends Pieza{
      * @param blancas true si el peón es blanco, false si es negro
      */
     public Peon(Posicion p, boolean blancas) {
-        super(p, blancas);
+        super(p, blancas, 'p');
     }
 
     /**
@@ -27,65 +27,33 @@ public class Peon extends Pieza{
      *      * false en caso contrario
      */
     @Override
-    public boolean compMov(Tablero t, Posicion p) {
+    public boolean compMov(Tablero t, Posicion destinoPos) {
         boolean valido=false;
-        int dir;
-        Pieza destino = t.getPosicion(p);
 
-        if(p.dentroTablero()){
-            if (this.blancas) {
-                // Comprobación de avance una fila hacia delante
-                if (p.comprobarFila(this.p.getFila() + 1)) {
+        if (destinoPos.dentroTablero()) {
 
-                    // Movimiento recto sin captura
-                    if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
+        Pieza destino = t.getPosicion(destinoPos);
 
-                        //Movimiento permitido
-                        valido = true;
-                    }
+        int df = destinoPos.getFila() - this.p.getFila();
+        int dc = destinoPos.getColumna() - this.p.getColumna();
+        int filaInicial = this.blancas ? 6 : 1;
 
-                    // Captura en diagonal
-                    else if (p.comprobarColumna(this.p.getColumna() + 1) || p.comprobarColumna(this.p.getColumna() - 1)) {
+        // Ajusta este dir según tu tablero:
+        // Si a1 = fila 7 y a8 = fila 0, blancas avanzan con -1
+        int dir = this.blancas ? -1 : 1;
 
-                        //Hay una pieza en la casilla a la que se mueve
-                        if (destino != null)
+        // Recto
+        if (dc == 0 && df == dir && destino == null) valido=true;
 
-                            //La ficha es del otro bando
-                            if (destino.getBlancas() != this.blancas) {
-
-                                //Movimiento permitido
-                                valido = true;
-                            }
-                    }
-                }
-            }
-            else {
-                // Comprobación de avance una fila hacia delante
-                if (p.comprobarFila(this.p.getFila() - 1)) {
-
-                    // Movimiento recto sin captura
-                    if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
-
-                        //Movimiento permitido
-                        valido = true;
-                    }
-
-                    // Captura en diagonal
-                    else if (p.comprobarColumna(this.p.getColumna() + 1) || p.comprobarColumna(this.p.getColumna() - 1)) {
-
-                        //Hay una pieza en la casilla a la que se mueve
-                        if (destino != null)
-
-                            //La ficha es del otro bando
-                            if (destino.getBlancas() != this.blancas) {
-
-                                //Movimiento permitido
-                                valido = true;
-                            }
-                    }
-                }
-            }
+        if (dc == 0 && this.p.getFila() == filaInicial && df == 2*dir && destino == null) {
+            Posicion intermedia = new Posicion(this.p.getFila() + dir, this.p.getColumna());
+            if (t.getPosicion(intermedia) == null) valido=true;
         }
+
+        // Captura diagonal
+        if (Math.abs(dc) == 1 && df == dir && destino != null && destino.getBlancas() != this.blancas) valido=true;
+        }
+
         return valido;
     }
 

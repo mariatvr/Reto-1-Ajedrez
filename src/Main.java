@@ -43,7 +43,7 @@ public class Main {
 
         //Buscamos al Rey negro y comprobamos jaque
         Posicion posReyNegro = localizarRey(miTablero, false);
-        boolean jaqueNegro = miTablero.jaque(posReyBlanco, false);
+        boolean jaqueNegro = miTablero.jaque(posReyNegro, false);
 
 
         if (jaqueBlanco) {
@@ -67,11 +67,7 @@ public class Main {
                 //hacer bucle para que la entrada sea correcta e inicializar variable "blancas" a true o false.
             } while (!valido);
 
-            if (inicia.equals("blancas")) {
-                blancas = true;
-            } else {
-                blancas = false;
-            }
+            blancas = inicia.equalsIgnoreCase("blancas");
         }
         return blancas;
     }
@@ -80,6 +76,7 @@ public class Main {
         /*
         Primero de todo, valida que no contiene símbolos antes de comprobar el String por trozos.
          */
+        piezas = piezas.replace(" ", "");
         boolean valido = false;
         for (int i = 0; i < piezas.length(); i++) {
             char c = piezas.charAt(i);
@@ -87,7 +84,7 @@ public class Main {
             Si el caracter actual que recorre el string es una letra o un número es válido.
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
-            if (Character.isLetterOrDigit(c) || c == ' ') {
+            if (Character.isLetterOrDigit(c) || c == ',') {
                 valido = true;
             } else {
                 valido = false;
@@ -105,7 +102,7 @@ public class Main {
                 /*
                 Si contiene un espacio el caracter actual, se almacena el trozo de una pieza y del movimiento.
                  */
-                if (c == ' ') {
+                if (c == ',') {
                     break;
                 }
                 trozo = trozo + c;
@@ -200,7 +197,6 @@ public class Main {
             movimiento = sc.nextLine();
 
             if (movimiento.matches(patron)) {
-                System.out.println("Formato válido");
                 valido = false;
             } else {
                 System.out.println("Formato incorrecto");
@@ -254,6 +250,96 @@ public class Main {
         return true;
     }
 
+    public static Posicion convertirPosicion (char columna, char fila){
+        int c = columna - 'a';           // a-h → 0-7
+        int f = 8 - (fila - '0');        // 1-8 → 7-0
+        return new Posicion(f, c);
+    }
+
+    public static void muevePieza (Tablero tablero, char tipo, Posicion destino, boolean blancas, boolean fila, boolean columna, int fijo) {
+        boolean movRealizado = false;
+
+        for (int row = 0; row <= 7; row++) {
+            for (int col = 0; col <= 7; col++) {
+
+                if(columna){
+                    Posicion p=new Posicion(row,fijo);
+                    if(tablero.getPosicion(p)!=null) {
+                        if(tablero.getPosicion(p).getTipo() == tipo && tablero.getPosicion(p).getBlancas() == blancas) {
+                            if(tablero.mover(p, destino)){
+                                movRealizado=true;
+                            }
+                        }
+                    }
+                }
+                else if(fila){
+                    Posicion p=new Posicion(fijo,col);
+                    if(tablero.getPosicion(p)!=null) {
+                        if(tablero.getPosicion(p).getTipo() == tipo && tablero.getPosicion(p).getBlancas() == blancas){
+                            if(tablero.mover(p, destino)){
+                                movRealizado=true;
+                            }
+                        }
+                    }
+                }
+                else{
+                    Posicion p=new Posicion(row,col);
+                    if(tablero.getPosicion(p)!=null) {
+                        if(tablero.getPosicion(p).getTipo() == tipo && tablero.getPosicion(p).getBlancas() == blancas){
+                            if(tablero.mover(p, destino)) {
+                                movRealizado = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(!movRealizado) {
+            if (blancas){
+                System.out.println("Movimiento no válido, blancas pierden");
+            }else{
+                System.out.println("Movimiento no válido, negras pierden");
+            }
+        }
+    }
+    public static void mover (Tablero t, String movimiento, boolean blancas) {
+        boolean movRealizado = false;
+        char tipo='p';
+        if(Character.isUpperCase(movimiento.charAt(0))) {
+            tipo=movimiento.charAt(0);
+        }
+
+        if (movimiento.length() == 2) {
+            Posicion posDestino = convertirPosicion(movimiento.charAt(0), movimiento.charAt(1));
+            muevePieza(t,tipo,posDestino, blancas,false,false,0);
+        } //mover peon
+
+        else if (movimiento.length() == 3) {
+            //pieza normal
+            if (tipo != 'p') {
+                    Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
+                    muevePieza(t,tipo,posDestino, blancas,false,false,0);
+            }
+            //peon con conflicto
+            else {
+                Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
+                int columna = convertirPosicion(movimiento.charAt(0), '1').getColumna();
+                muevePieza(t,tipo,posDestino, blancas,false,true,columna);
+
+            }
+        } else {
+            Posicion posDestino = convertirPosicion(movimiento.charAt(2), movimiento.charAt(3));
+
+            if (Character.isDigit(movimiento.charAt(1))) {
+                int fila = movimiento.charAt(1);
+                muevePieza(t,tipo,posDestino, blancas,true,false,fila);
+            } else {
+                int columna = convertirPosicion(movimiento.charAt(1), '1').getColumna();
+                muevePieza(t,tipo,posDestino, blancas,false,true,columna);
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -297,311 +383,28 @@ public class Main {
         tablero.colocarPiezasDesdeNotacion(piezasN, false);
 
         // Imprimir tablero
-        System.out.println("Tablero Vacio:");
+        System.out.println("Tablero Inicial:");
         System.out.println(tablero);
 
         //Se establece quien mueve: "Mueven blancas."/"Mueven negras."
         mueven = jugadorInicial(tablero);
 
+        if(mueven){
+            System.out.println("Mueven balncas");
+        }
+        else{
+            System.out.println("Mueven negras");
+        }
+
         //Pedimos movimiento "[TCARD]?[1-8]?[a-h][1-8]"
         movimiento = pidoMovimiento();
 
-        //Realizamos movimiento
+        System.out.println("Movimiento:"+ movimiento + " "+ mueven);
+
+        mover(tablero,movimiento, mueven);
 
         // Imprimir tablero final
+        System.out.println("Tablero Final:");
         System.out.println(tablero);
-    }
-
-    public static Posicion convertirPosicion (char columna, int fila){
-        columna = switch (columna){
-            case 'a' -> 0;
-            case 'b' -> 1;
-            case 'c' -> 2;
-            case 'd' -> 3;
-            case 'e' -> 4;
-            case 'f' -> 5;
-            case 'g' -> 6;
-            case 'h' -> 7;
-            default -> throw new IllegalStateException("Unexpected value: " + columna);
-        };
-
-        return new Posicion(columna, fila);
-    }
-
-    public static void mover (Tablero t, String movimiento, boolean blancas) {
-        if (movimiento.length() == 2) {
-            Posicion posDestino = convertirPosicion(movimiento.charAt(0), movimiento.charAt(1));
-
-            for (int i = 0; i <= 7; i++) {
-                for (int j = 0; j <= 7; j++) {
-                    Posicion p = new Posicion(i, j);
-                    Pieza pieza = t.getPosicion(p);
-
-                    if (pieza instanceof Peon) {
-                        if (pieza.compMov(t, posDestino)) {
-                            pieza.mover(t, posDestino);
-                            break;
-                        }
-                    }
-
-                }
-            }
-
-
-        } //mover peon
-
-        else if (movimiento.length() == 3) {
-            //pieza normal
-            if (Character.isUpperCase(movimiento.charAt(0))) {
-                {
-                    char tipo = movimiento.charAt(0);
-                    Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
-
-                    switch (tipo) {
-                        case 'T' -> {
-                            for (int i = 0; i <= 7; i++) {
-                                for (int j = 0; j <= 7; j++) {
-                                    Posicion p = new Posicion(i, j);
-                                    Pieza pieza = t.getPosicion(p);
-
-                                    if (pieza instanceof Torre) {
-                                        if (pieza.compMov(t, posDestino)) {
-                                            pieza.mover(t, posDestino);
-                                            break;
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                        case 'A' -> {
-                            for (int i = 0; i <= 7; i++) {
-                                for (int j = 0; j <= 7; j++) {
-                                    Posicion p = new Posicion(i, j);
-                                    Pieza pieza = t.getPosicion(p);
-
-                                    if (pieza instanceof Alfil) {
-                                        if (pieza.compMov(t, posDestino)) {
-                                            pieza.mover(t, posDestino);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        case 'C' -> {
-                            for (int i = 0; i <= 7; i++) {
-                                for (int j = 0; j <= 7; j++) {
-                                    Posicion p = new Posicion(i, j);
-                                    Pieza pieza = t.getPosicion(p);
-
-                                    if (pieza instanceof Caballo) {
-                                        if (pieza.compMov(t, posDestino)) {
-                                            pieza.mover(t, posDestino);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        case 'D' -> {
-                            for (int i = 0; i <= 7; i++) {
-                                for (int j = 0; j <= 7; j++) {
-                                    Posicion p = new Posicion(i, j);
-                                    Pieza pieza = t.getPosicion(p);
-
-                                    if (pieza instanceof Reina) {
-                                        if (pieza.compMov(t, posDestino)) {
-                                            pieza.mover(t, posDestino);
-                                            break;
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                        case 'R' -> {
-                            for (int i = 0; i <= 7; i++) {
-                                for (int j = 0; j <= 7; j++) {
-                                    Posicion p = new Posicion(i, j);
-                                    Pieza pieza = t.getPosicion(p);
-
-                                    if (pieza instanceof Rey) {
-                                        if (pieza.compMov(t, posDestino)) {
-                                            pieza.mover(t, posDestino);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        default -> throw new IllegalStateException("Unexpected value: " + tipo);
-                    }
-                }
-            }
-            //peon con conflicto
-            else {
-                Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
-                int columna = convertirPosicion(movimiento.charAt(0), 1).getColumna();
-
-                for (int i = 0; i <= 7; i++) {
-
-                    Posicion p = new Posicion(columna, i);
-                    Pieza pieza = t.getPosicion(p);
-
-                    if (pieza instanceof Peon) {
-                        if (pieza.compMov(t, posDestino)) {
-                            pieza.mover(t, posDestino);
-                            break;
-                        }
-                    }
-                }
-            }
-        } else if (movimiento.length() == 4) {
-            char tipo = movimiento.charAt(0);
-            Posicion posDestino = convertirPosicion(movimiento.charAt(2), movimiento.charAt(3));
-
-            if (Character.isDigit(movimiento.charAt(1))) {
-                int fila = movimiento.charAt(1);
-                switch (tipo) {
-                    case 'T' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(i, fila);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Torre) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'A' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(i, fila);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Alfil) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'C' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(i, fila);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Caballo) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'D' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(i, fila);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Reina) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'R' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(i, fila);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Rey) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    default -> throw new IllegalStateException("Unexpected value: " + tipo);
-                }
-            } else {
-                int columna = convertirPosicion(movimiento.charAt(1), 1).getColumna();
-                switch (tipo) {
-                    case 'T' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(columna, i);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Torre) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'A' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(columna, i);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Alfil) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'C' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(columna, i);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Caballo) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'D' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(columna, i);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Reina) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    case 'R' -> {
-                        for (int i = 0; i <= 7; i++) {
-                            Posicion p = new Posicion(columna, i);
-                            Pieza pieza = t.getPosicion(p);
-
-                            if (pieza instanceof Rey) {
-                                if (pieza.compMov(t, posDestino)) {
-                                    pieza.mover(t, posDestino);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    default -> throw new IllegalStateException("Unexpected value: " + tipo);
-                }
-            }
-        }
     }
 }

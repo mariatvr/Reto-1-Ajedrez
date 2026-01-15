@@ -72,25 +72,10 @@ public class Posicion {
         return this.columna == c;
     }
 
-    public Posicion getDerivada(int signo, int cantidad, char direccion){
-        int c=this.columna;
-        int f=this.fila;
-        int diferencia=signo*cantidad;
-
-        if(direccion=='c'){
-            c=c+diferencia;
-        }
-        if(direccion=='f'){
-            f=f+diferencia;
-        }
-
-        return new Posicion(f, c);
-    }
-
     public boolean dentroTablero(){
         boolean dentro=true;
 
-        if(this.fila<0||this.fila>7||this.columna<0||this.fila>7){
+        if (this.fila < 0 || this.fila > 7 || this.columna < 0 || this.columna > 7) {
             dentro=false;
         }
 

@@ -4,7 +4,7 @@ La pieza Reina del ajedrez.
 public class Reina extends Pieza{
 
     public Reina(Posicion p, boolean blancas) {
-        super(p, blancas);
+        super(p, blancas,'D');
     }
 
     /*
@@ -12,25 +12,33 @@ public class Reina extends Pieza{
      */
 public boolean compMov(Tablero t, Posicion p) {
     boolean valido = false;
+    int fila = this.p.getFila()-p.getFila();
+    int columna = this.p.getColumna()-p.getColumna();
 
+    if(fila!=0){
+        fila=Math.abs(fila)/fila;
+    } else fila=0;
+    if(columna!=0){
+        columna=Math.abs(columna)/columna;
+    }  else columna=0;
         /*
         Si se puede mover en horizontal.
          */
 
-    if (p.comprobarFila(this.p.getFila()) && t.caminoLibre(this.p, p, 0)) {
+    if (p.comprobarFila(this.p.getFila()) && t.caminoLibre(this.p, p, fila,columna)) {
         valido = true;
 
             /*
             Si se puede mover en vertical.
              */
 
-        if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, 0)) {
+        if (p.comprobarColumna(this.p.getColumna()) && t.caminoLibre(this.p, p, fila,columna)) {
 
                 /*
             Si se puede mover en diagonales.
                 */
 
-            if(comprobarDiagonal(p) && t.caminoLibre(this.p, p, 0)) {
+            if(comprobarDiagonal(p) && t.caminoLibre(this.p, p, fila,columna)) {
             }
         }
     }

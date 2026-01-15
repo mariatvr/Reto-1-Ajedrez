@@ -6,7 +6,7 @@
 public class Torre extends Pieza {
 
     public Torre(Posicion p, boolean blancas) {
-        super(p, blancas);
+        super(p, blancas,'T');
     }
 
     @Override
@@ -18,11 +18,20 @@ public class Torre extends Pieza {
         // (Misma fila o misma columna, pero no ambas a la vez)
         boolean mismaFila = this.p.getFila() == p.getFila();
         boolean mismaColumna = this.p.getColumna() == p.getColumna();
+        int fila = this.p.getFila()-p.getFila();
+        int columna = this.p.getColumna()-p.getColumna();
+
+        if(fila!=0){
+            fila=Math.abs(fila)/fila;
+        } else fila=0;
+        if(columna!=0){
+            columna=Math.abs(columna)/columna;
+        }  else columna=0;
 
         if (mismaFila != mismaColumna) {
 
             // 2. Verificar que no haya piezas en el camino
-            if (t.caminoLibre(this.p, p, 0)) {
+            if (t.caminoLibre(this.p, p, fila,columna)) {
 
                 Pieza destino = t.getPosicion(p);
 

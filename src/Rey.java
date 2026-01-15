@@ -18,7 +18,7 @@ public class Rey extends Pieza{
      * @param blancas true si el Rey es blanco, false si es negro
      */
     public Rey(Posicion p, boolean blancas) {
-        super(p, blancas);
+        super(p, blancas,'R');
         //this.enroque=enroque;
     }
 
@@ -35,18 +35,17 @@ public class Rey extends Pieza{
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
         Pieza destino = t.getPosicion(p);
+        int difCol=Math.abs(this.p.getColumna()-p.getColumna());
+        int difFila=Math.abs(this.p.getFila()-p.getFila());
 
         if(p.dentroTablero()){
             if(destino!=null){
-                if(destino.getBlancas()!=this.getBlancas()){
-                    if(!t.jaque(p,this.blancas)){
-                       valido=true;
+                if(difCol<=1&&difFila<=1){
+                    if(destino.getBlancas()!=this.getBlancas()){
+                        if(!t.jaque(p,this.blancas)){
+                            valido=true;
+                        }
                     }
-                }
-            }
-            else{
-                if(!t.jaque(p,this.blancas)){
-                    valido=true;
                 }
             }
         }

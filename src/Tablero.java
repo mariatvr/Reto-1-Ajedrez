@@ -78,7 +78,7 @@ public class Tablero {
                     pieza = new Reina(pos, blancas);
                     break;
                 case 'P':
-                    pieza = new Reina(pos, blancas);
+                    pieza = new Peon(pos, blancas);
                     break;
                 default:
                     throw new IllegalArgumentException("Tipo de pieza desconocido: " + tipo);
@@ -122,17 +122,24 @@ public class Tablero {
     }
 
     public boolean jaque(Posicion p, boolean blanca){
+
         boolean jaque=false;
         int cont=0;
-        Pieza amenazas[]=new Pieza[15];
+        //Pieza amenazas[]=new Pieza[15]; Para futuras implementaciones
+        Posicion posAtacante;
 
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 7; j++) {
-                    if (this.tablero[i][j].getBlancas()!=blanca){
-                        if(this.tablero[i][j].compMov(this,p)){
-                            jaque= true;
-                            amenazas[cont]=this.tablero[i][j];
-                            cont++;
+                    posAtacante=new Posicion(i,j);
+
+                    if(this.getPosicion(posAtacante)!=null) {
+                        if (this.getPosicion(posAtacante).getBlancas() != blanca) {
+                            if (this.getPosicion(posAtacante).compMov(this, p)) {
+                                jaque = true;
+                                break;
+                                //amenazas[cont] = this.getPosicion(posAtacante);
+                                //cont++;
+                            }
                         }
                     }
                 }
@@ -141,36 +148,66 @@ public class Tablero {
         return jaque;
     }
 
-    @Override
-    public String toString() {
-        // StringBuilder se usa para construir el String
-        StringBuilder sb = new StringBuilder();
+    public boolean mover(Posicion pinicial, Posicion pfinal){
+        boolean movimiento=false;
 
-        // Recorremos todas las filas del tablero (0 a 7)
-        for (int fila = 0; fila < 8; fila++) {
-
-            // Recorremos todas las columnas de la fila actual
-            for (int col = 0; col < 8; col++) {
-
-                // Si no hay pieza en la posición, imprimimos un símbolo alternado para casillas
-                if (tablero[fila][col] == null) {
-
-                    if ((fila + col) % 2 == 0) {
-                        sb.append("□ "); // Casilla clara
-                    } else {
-                        sb.append("■ "); // Casilla oscura
-                    }
-                } else {
-                    // Si hay una pieza, llamamos a su toString() para mostrarla
-                    sb.append(tablero[fila][col].toString() + " ");
-                }
-            }
-
-            // Después de cada fila, agregamos un salto de línea para pasar a la siguiente
-            sb.append("\n");
+        if(getPosicion(pinicial).compMov(this,pfinal)){
+            setPieza(getPosicion(pinicial), pfinal); //Coloca la ficha en el tablero
+            setPieza(null,pinicial); //Elimina la ficha de su posición inicial
+            movimiento=true;
         }
-        return sb.toString();
+        return movimiento;
     }
 
+    // COLORINESSSSSS
+    private static final String RESET = "\u001B[0m";
 
+    // Fondo general verde
+    private static final String BG_VERDE = "\u001B[48;5;22m";
+    // Casillas
+    private static final String BG_BLANCA = "\u001B[48;5;230m"; // casillas blancas
+    private static final String BG_MARRON = "\u001B[48;5;94m"; // casillas marrones
+
+    // Piezas
+    private static final String FG_BLANCA = "\u001B[38;5;231m"; // piezas blancas
+    private static final String FG_NEGRA  = "\u001B[38;5;16m"; // piezas marrones
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(); // "StringBuilder" para construir el tablero línea por línea
+
+        // Recorremos las filas del tablero
+        for (int fila = 0; fila < 8; fila++) {
+            int rank = 8 - fila;
+            sb.append(" ").append(rank).append(" "); // ← guía izquierda
+
+            for (int col = 0; col < 8; col++) {
+                boolean clara = (fila + col) % 2 == 0; // Si fila y columna son pares → clara, si es impar → marrón
+                String bg = clara ? BG_BLANCA : BG_MARRON;
+                sb.append(bg);
+
+                // Comprobamos si hay una pieza ya en la casilla para saber que deberia de haber ahi
+                if (tablero[fila][col] == null) {
+                    sb.append("     "); //Si no hay pieza, ponemos un espacio vacío de 3 caracteres
+                } else {
+                    Pieza p = tablero[fila][col];
+                    sb.append(" ").append(p).append(" "); //Si hay pieza, ponemos su simbolo de ficha centrado
+                }
+                sb.append(RESET);
+            }
+            sb.append("\n");
+        }
+
+        // Guía inferior (alineada con las casillas)
+        sb.append("   "); // mismo margen que los números de la izquierda
+        for (char c = 'a'; c <= 'h'; c++) {
+            sb.append("  ").append(c).append("  "); // ancho = 4
+        }
+
+        sb.append("\n");
+
+        // Devolvemos tablero como un String
+        return sb.toString();
+    }
 }
+

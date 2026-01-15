@@ -1,7 +1,7 @@
 public class Caballo extends Pieza {
 
         public Caballo(Posicion p, boolean blancas) {
-            super(p, blancas);
+            super(p, blancas,'C');
         }
 
         @Override

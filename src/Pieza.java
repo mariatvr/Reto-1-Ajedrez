@@ -15,15 +15,18 @@ public abstract class Pieza {
     /** Indica si la pieza pertenece al bando blanco (true) o negro (false) */
     protected boolean blancas;
 
+    /** Indica que tipo de pieza es **/
+    protected char tipo;
     /**
      * Constructor de la clase Pieza.
      *
      * @param p posición inicial de la pieza
      * @param blancas true si la pieza es blanca, false si es negra
      */
-    public Pieza(Posicion p, boolean blancas) {
+    public Pieza(Posicion p, boolean blancas, char tipo) {
         this.p = p;
         this.blancas = blancas;
+        this.tipo=tipo;
     }
 
     /**
@@ -34,6 +37,8 @@ public abstract class Pieza {
     public boolean getBlancas(){
         return this.blancas;
     }
+
+    public char getTipo(){return this.tipo;}
 
     public Posicion getPosicion(){return this.p;}
 
@@ -54,13 +59,5 @@ public abstract class Pieza {
      * @param p posición destino
      * @return si el movimiento es valido lo realiza.
      */
-    public void mover(Tablero t, Posicion p){
-        if(compMov(t,p)){
-            Posicion pAnterior = this.p;
-            this.p = p;
 
-            t.setPieza(null,pAnterior); //Elimina la ficha de su posición inicial
-            t.setPieza(this, this.p); //Coloca la ficha en el tablero
-        }
-    }
 }
