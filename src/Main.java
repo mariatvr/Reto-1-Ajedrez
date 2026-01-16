@@ -411,7 +411,13 @@ public class Main {
         //Pedimos movimiento "[TCARD]?[1-8]?[a-h][1-8]"
         movimiento = pidoMovimiento();
 
-        System.out.println("Movimiento:"+ movimiento + " "+ mueven);
+        if(mueven)
+        {
+            System.out.println("Movimiento:"+ movimiento + " blancas");
+        }
+        else{
+            System.out.println("Movimiento:"+ movimiento + " negras");
+        }
 
         mover(tablero,movimiento, mueven);
 

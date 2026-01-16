@@ -130,10 +130,9 @@ public class Tablero {
         //Pieza amenazas[]=new Pieza[15]; Para futuras implementaciones
         Posicion posAtacante;
 
-            for (int i = 0; i < 7; i++) {
-                for (int j = 0; j < 7; j++) {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
                     posAtacante=new Posicion(i,j);
-
                     if(this.getPosicion(posAtacante)!=null) {
                         if (this.getPosicion(posAtacante).getBlancas() != blanca) {
                             if (this.getPosicion(posAtacante).compMov(this, p)) {

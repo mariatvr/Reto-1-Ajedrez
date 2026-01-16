@@ -35,16 +35,25 @@ public class Rey extends Pieza{
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido=false;
         Pieza destino = t.getPosicion(p);
-        int difCol=Math.abs(this.p.getColumna()-p.getColumna());
-        int difFila=Math.abs(this.p.getFila()-p.getFila());
+        int df = p.getFila() - this.p.getFila();
+        int dc = p.getColumna() - this.p.getColumna();
 
         if(p.dentroTablero()){
-            if(destino!=null){
-                if(difCol<=1&&difFila<=1){
-                    if(destino.getBlancas()!=this.getBlancas()){
-                        if(!t.jaque(p,this.blancas)){
-                            valido=true;
-                        }
+            if (Math.abs(df) <= 1 && Math.abs(dc) <= 1 && !(df == 0 && dc == 0)){
+                if(destino==null){
+                    if(!t.jaque(p,this.blancas)){
+                        valido=true;
+                    }
+                    else{
+                        System.out.println("El rey se pondría en Jaque");
+                    }
+                }
+                else if(destino.getBlancas()!=this.getBlancas()){
+                    if(!t.jaque(p,this.blancas)){
+                        valido=true;
+                    }
+                    else{
+                        System.out.println("El rey se pondría en Jaque");
                     }
                 }
             }
