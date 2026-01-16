@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e46d8b1-2709-49b9-b22d-c3d46bc2e7c2" name="Changes" comment="Programa funcional">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Concept.odt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reto-1-Ajedrez.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Alfil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Caballo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Peon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Pieza.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Posicion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Reina.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Rey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Tablero.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Torre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/pruebas_ajedrez.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +40,7 @@
         <entry key="$PROJECT_DIR$" value="ivotorgar" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -218,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768460669133</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Programa funcional">
+      <option name="closed" value="true" />
+      <created>1768467345617</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1768467345617</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

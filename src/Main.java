@@ -302,6 +302,18 @@ public class Main {
                 System.out.println("Movimiento no válido, negras pierden");
             }
         }
+        else{
+            Posicion posRey = localizarRey(tablero, !blancas);
+            boolean jaque = tablero.jaque(posRey, !blancas);
+
+            if(jaque){
+                if (!blancas){
+                    System.out.println("El Rey blanco está en Jaque, blancas pierden");
+                }else{
+                    System.out.println("El Rey negro está en Jaque, negras pierden");
+                }
+            }
+        }
     }
     public static void mover (Tablero t, String movimiento, boolean blancas) {
         boolean movRealizado = false;
