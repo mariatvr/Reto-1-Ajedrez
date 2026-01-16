@@ -303,8 +303,8 @@ public class Main {
             }
         }
         else{
-            Posicion posRey = localizarRey(tablero, !blancas);
-            boolean jaque = tablero.jaque(posRey, !blancas);
+            Posicion posRey = localizarRey(tablero, blancas);
+            boolean jaque = tablero.jaque(posRey, blancas);
 
             if(jaque){
                 if (!blancas){
@@ -400,13 +400,6 @@ public class Main {
 
         //Se establece quien mueve: "Mueven blancas."/"Mueven negras."
         mueven = jugadorInicial(tablero);
-
-        if(mueven){
-            System.out.println("Mueven balncas");
-        }
-        else{
-            System.out.println("Mueven negras");
-        }
 
         //Pedimos movimiento "[TCARD]?[1-8]?[a-h][1-8]"
         movimiento = pidoMovimiento();
