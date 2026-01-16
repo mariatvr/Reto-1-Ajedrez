@@ -3,17 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    /*
-    Pedir entrada Blancas/Negras y guardarlo como strings.
-    Generar tablero y pasarle los strings.
-    Comprobar si tablero válido.
-    Comprobar si jaque.
-    Imprimir si válido.
-    Si no jaque, pedir quien mueve.
-    Pedir movimiento.
-    Comprobar movimiento válido.
-    Imprimir nuevo tablero si válido.
-    */
+
 
     private static Posicion localizarRey(Tablero miTablero, boolean esBlanca) {
         for (int i = 0; i < 8; i++) {
@@ -33,7 +23,7 @@ public class Main {
     }
 
     public static boolean jugadorInicial(Tablero miTablero) {
-        String inicia = "";
+        String inicia;
         boolean blancas;
         Scanner sc = new Scanner(System.in);
 
@@ -81,16 +71,12 @@ public class Main {
         for (int i = 0; i < piezas.length(); i++) {
             char c = piezas.charAt(i);
             /*
-            Si el caracter actual que recorre el string es una letra o un número es válido.
+            Si el carácter actual que recorre el string es una letra o un número es válido.
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
-            if (Character.isLetterOrDigit(c) || c == ',') {
-                valido = true;
-            } else {
-                valido = false;
-            }
+            valido = Character.isLetterOrDigit(c) || c == ',';
         }
-        String trozo = "";
+        StringBuilder trozo = new StringBuilder();
         int ultChar = 0;
         for (int j = 0; j < piezas.length(); j++) {
 
@@ -100,12 +86,12 @@ public class Main {
             for (; ultChar < piezas.length(); ultChar++) {
                 char c = piezas.charAt(ultChar);
                 /*
-                Si contiene un espacio el caracter actual, se almacena el trozo de una pieza y del movimiento.
+                Si contiene un espacio el carácter actual, se almacena el trozo de una pieza y del movimiento.
                  */
                 if (c == ',') {
                     break;
                 }
-                trozo = trozo + c;
+                trozo.append(c);
             }
 
                 /*
@@ -115,13 +101,13 @@ public class Main {
                 /*
                 Se comprueba que la primera sea mayúscula (de acuerdo a la notación del ajedrez).
                  */
-                if (trozo.charAt(0) == trozo.toUpperCase().charAt(0)) {
+                if (trozo.charAt(0) == trozo.toString().toUpperCase().charAt(0)) {
                     /*
-                    Ahora se comprueba que el siguiente caracter sea una letra.
+                    Ahora se comprueba que el siguiente carácter sea una letra.
                      */
                     if (Character.isLetter(trozo.charAt(1))) {
                         /*
-                        Por último, se comprueba que el siguiente caracter sea un número.
+                        Por último, se comprueba que el siguiente carácter sea un número.
                          */
                         if (Character.isDigit(trozo.charAt(2))) {
                             /*
@@ -144,15 +130,15 @@ public class Main {
                  */
             } else if (trozo.length() == 2) {
                 /*
-                Comprobamos que el primer caracter sea una letra.
+                Comprobamos que el primer carácter sea una letra.
                  */
                 if (Character.isLetter(trozo.charAt(0))) {
                     /*
-                    Aquí lo mismo pero comprobamos el número.
+                    Aquí lo mismo, pero comprobamos el número.
                      */
                     if (Character.isDigit(trozo.charAt(1))) {
                         /*
-                        Si es válido, se le asigna true al boolean valido.
+                        Si es válido, se le asigna true al boolean válido.
                          */
                         valido = true;
                         /*
@@ -167,18 +153,16 @@ public class Main {
                 }
 
                 /*
-                Si no, el formato introducido es inválido, por lo tanto el boolean valido es false.
+                Si no, el formato introducido es inválido, por lo tanto, el boolean válido es false.
                  */
             } else {
                 valido = false;
+                break;
                 /*
                 Una vez que sea inválido, se acaba la comprobación y finaliza la función.
                  */
-                if (valido == false) {
-                    break;
-                }
             }
-            trozo = "";
+            trozo = new StringBuilder();
         }
         return valido;
     }
@@ -186,7 +170,7 @@ public class Main {
     public static String pidoMovimiento() {
         String movimiento;
         String patron = "[TCARD]?[1-8]?[a-h][1-8]";
-        //Hay un posible numero seguido de la mayúscula que indica la fila
+        //Hay un posible número seguido de la mayúscula que indica la fila
         // de la figura que queremos mover en caso de que haya otra de
         // su mismo tipo en esa misma columna.
 
@@ -316,7 +300,7 @@ public class Main {
         }
     }
     public static void mover (Tablero t, String movimiento, boolean blancas) {
-        boolean movRealizado = false;
+
         char tipo='p';
         if(Character.isUpperCase(movimiento.charAt(0))) {
             tipo=movimiento.charAt(0);
@@ -329,13 +313,13 @@ public class Main {
 
         else if (movimiento.length() == 3) {
             //pieza normal
+            Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
+
             if (tipo != 'p') {
-                    Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
-                    muevePieza(t,tipo,posDestino, blancas,false,false,0);
+                muevePieza(t,tipo,posDestino, blancas,false,false,0);
             }
             //peon con conflicto
             else {
-                Posicion posDestino = convertirPosicion(movimiento.charAt(1), movimiento.charAt(2));
                 int columna = convertirPosicion(movimiento.charAt(0), '1').getColumna();
                 muevePieza(t,tipo,posDestino, blancas,false,true,columna);
 
@@ -353,19 +337,19 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+     static void main(String[] args) {
 
         Tablero tablero = new Tablero();
 
         Scanner scan = new Scanner(System.in);
         boolean mueven;
-        boolean entradaCorrecta = true;
+        boolean entradaCorrecta;
         String piezasB;
         String piezasN;
         String movimiento;
 
         // Imprimir tablero
-        System.out.println("Tablero Vacio:");
+        System.out.println("Tablero Vacío:");
         System.out.println(tablero);
        /*
        Se pide la entrada del tablero inicial

@@ -1,5 +1,5 @@
 public class Tablero {
-    Pieza tablero [][];
+    Pieza[][] tablero;
 
 
     Tablero (){
@@ -10,7 +10,6 @@ public class Tablero {
     /**
      * Coloca piezas en el tablero a partir de una cadena en notación algebraica.
      * Se usa tanto para blancas como para negras.
-     *
      * Ejemplo:
      * "Rg1, Tf1, h2, Ce5, Ta1"
      */
@@ -60,29 +59,15 @@ public class Tablero {
             Posicion pos = new Posicion(fila, columna);
 
             // Crea la pieza correspondiente
-            Pieza pieza;
-            switch (tipo) {
-                case 'R':
-                    pieza = new Rey(pos, blancas);
-                    break;
-                case 'T':
-                    pieza = new Torre(pos, blancas);
-                    break;
-                case 'C':
-                    pieza = new Caballo(pos, blancas);
-                    break;
-                case 'A':
-                    pieza = new Alfil(pos, blancas);
-                    break;
-                case 'D':
-                    pieza = new Reina(pos, blancas);
-                    break;
-                case 'P':
-                    pieza = new Peon(pos, blancas);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Tipo de pieza desconocido: " + tipo);
-            }
+            Pieza pieza = switch (tipo) {
+                case 'R' -> new Rey(pos, blancas);
+                case 'T' -> new Torre(pos, blancas);
+                case 'C' -> new Caballo(pos, blancas);
+                case 'A' -> new Alfil(pos, blancas);
+                case 'D' -> new Reina(pos, blancas);
+                case 'P' -> new Peon(pos, blancas);
+                default -> throw new IllegalArgumentException("Tipo de pieza desconocido: " + tipo);
+            };
 
             // Coloca la pieza en el tablero
             tablero[fila][columna] = pieza;
@@ -163,15 +148,9 @@ public class Tablero {
     // COLORINESSSSSS
     private static final String RESET = "\u001B[0m";
 
-    // Fondo general verde
-    private static final String BG_VERDE = "\u001B[48;5;22m";
     // Casillas
     private static final String BG_BLANCA = "\u001B[48;5;230m"; // casillas blancas
     private static final String BG_MARRON = "\u001B[48;5;94m"; // casillas marrones
-
-    // Piezas
-    private static final String FG_BLANCA = "\u001B[38;5;231m"; // piezas blancas
-    private static final String FG_NEGRA  = "\u001B[38;5;16m"; // piezas marrones
 
     @Override
     public String toString() {

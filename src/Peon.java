@@ -17,12 +17,12 @@ public class Peon extends Pieza{
 
     /**
      * Comprueba el movimiento del peón según las reglas básicas:
-     *   ·Avance de una o dos casillas (en caso de no haber movido aun)
+     *   ·Avance de una o dos casillas (en caso de no haber movido aún)
      *   hacia delante si está libre.
      *   ·Captura en diagonal de una pieza enemiga.
      *
      * @param t tablero donde se efectúa el movimiento
-     * @param p posición destino
+     * @param destinoPos posición de destino
      * @return true si el movimiento es válido,
      *      * false en caso contrario
      */

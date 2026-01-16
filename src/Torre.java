@@ -12,7 +12,6 @@ public class Torre extends Pieza {
     @Override
     public boolean compMov(Tablero t, Posicion p) {
         boolean valido = false;
-        boolean mueve=false;
 
         // 1. Comprobar si el movimiento es horizontal o vertical
         // (Misma fila o misma columna, pero no ambas a la vez)

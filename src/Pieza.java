@@ -1,6 +1,6 @@
 /**
  * Clase abstracta que representa una pieza genérica del tablero.
- *
+
  * Cada pieza tiene una posición y un color (blancas o negras) y
  * define un comportamiento común para el movimiento, que será
  * implementado por las piezas concretas.
@@ -52,12 +52,5 @@ public abstract class Pieza {
      */
     public abstract boolean compMov(Tablero t, Posicion p);
 
-    /**
-     * Intenta mover la pieza a una nueva posición en el tablero.
-     *
-     * @param t tablero sobre el que se realiza el movimiento
-     * @param p posición destino
-     * @return si el movimiento es valido lo realiza.
-     */
 
 }
