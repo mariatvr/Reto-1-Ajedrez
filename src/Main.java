@@ -64,7 +64,7 @@ public class Main {
 
     public static boolean posicionIni(String piezas) {
         /*
-        Primero de todo, valida que no contiene símbolos antes de comprobar el String por trozos.
+        Primero de, valida que no contiene símbolos antes de comprobar el String por trozos.
          */
         piezas = piezas.replace(" ", "");
         boolean valido = false;
@@ -111,7 +111,7 @@ public class Main {
                          */
                         if (Character.isDigit(trozo.charAt(2))) {
                             /*
-                            Si todo lo anterior se cumple en ese trozo en concreto, es válido (true).
+                             Si  lo anterior se cumple en ese trozo en concreto, es válido (true).
                              */
                             valido = true;
                             /*
