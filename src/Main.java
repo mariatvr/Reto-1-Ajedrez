@@ -74,7 +74,10 @@ public class Main {
             Si el carácter actual que recorre el string es una letra o un número es válido.
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
-            valido = Character.isLetterOrDigit(c) || c == ',';
+            if (!Character.isLetterOrDigit(c) && c != ',') {
+                valido = false;
+                break;
+            }
         }
         StringBuilder trozo = new StringBuilder();
         int ultChar = 0;
@@ -101,11 +104,11 @@ public class Main {
                 /*
                 Se comprueba que la primera sea mayúscula (de acuerdo a la notación del ajedrez).
                  */
-                if (trozo.charAt(0) == trozo.toString().toUpperCase().charAt(0)) {
+                if (Character.isLetter(trozo.charAt(0)) && trozo.charAt(0) == trozo.toString().toUpperCase().charAt(0)) {
                     /*
-                    Ahora se comprueba que el siguiente carácter sea una letra.
+                    Ahora se comprueba que el siguiente carácter sea una letra minúscula.
                      */
-                    if (Character.isLetter(trozo.charAt(1))) {
+                    if (Character.isLetter(trozo.charAt(1)) && trozo.charAt(1) == trozo.toString().toLowerCase().charAt(1)) {
                         /*
                         Por último, se comprueba que el siguiente carácter sea un número.
                          */
@@ -130,9 +133,9 @@ public class Main {
                  */
             } else if (trozo.length() == 2) {
                 /*
-                Comprobamos que el primer carácter sea una letra.
+                Comprobamos que el primer carácter sea una letra minúscula.
                  */
-                if (Character.isLetter(trozo.charAt(0))) {
+                if (Character.isLetter(trozo.charAt(0)) && trozo.charAt(0) == trozo.toString().toLowerCase().charAt(0)) {
                     /*
                     Aquí lo mismo, pero comprobamos el número.
                      */
