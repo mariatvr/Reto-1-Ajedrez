@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Representa la pieza Peón del juego de ajedrez.
  * El peón puede avanzar una casilla hacia delante si está libre
@@ -56,6 +58,31 @@ public class Peon extends Pieza{
 
         return valido;
     }
+
+    public boolean estaEnFilaFinal() {
+        int fila = this.p.getFila();
+        return (this.blancas && fila == 0) || (!this.blancas && fila == 7);
+    }
+
+    public Pieza promocionar() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("¡Promoción del peón!");
+        System.out.println("¿En qué quieres convertirlo?");
+        System.out.println("1 - Reina");
+        System.out.println("2 - Torre");
+        System.out.println("3 - Alfil");
+        System.out.println("4 - Caballo");
+
+        int opcion = sc.nextInt();
+
+        return switch (opcion) {
+            case 2 -> new Torre(this.p, this.blancas);
+            case 3 -> new Alfil(this.p, this.blancas);
+            case 4 -> new Caballo(this.p, this.blancas);
+            default -> new Reina(this.p, this.blancas);
+        };
+    }
+
 
     @Override
     public String toString() {

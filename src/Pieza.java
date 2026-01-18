@@ -42,6 +42,11 @@ public abstract class Pieza {
 
     public Posicion getPosicion(){return this.p;}
 
+    public void setPosicion(Posicion nueva) {
+        this.p = nueva;
+    }
+
+
     /**
      * Comprueba el movimiento de la pieza según las reglas básicas:
      *

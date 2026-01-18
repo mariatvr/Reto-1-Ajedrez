@@ -135,15 +135,29 @@ public class Tablero {
     }
 
     public boolean mover(Posicion pinicial, Posicion pfinal){
-        boolean movimiento=false;
+        boolean movimiento = false;
 
-        if(getPosicion(pinicial).compMov(this,pfinal)){
-            setPieza(getPosicion(pinicial), pfinal); //Coloca la ficha en el tablero
-            setPieza(null,pinicial); //Elimina la ficha de su posición inicial
-            movimiento=true;
+        Pieza pieza = getPosicion(pinicial);
+
+        if (pieza != null && pieza.compMov(this, pfinal)) {
+
+            // Mover la pieza
+            setPieza(pieza, pfinal);
+            setPieza(null, pinicial);
+            pieza.setPosicion(pfinal); // importante actualizar la posición
+
+            // 🔽 AQUÍ VA LA PROMOCIÓN
+            if (pieza instanceof Peon peon && peon.estaEnFilaFinal()) {
+                Pieza nueva = peon.promocionar();
+                setPieza(nueva, pfinal);
+            }
+
+            movimiento = true;
         }
+
         return movimiento;
     }
+
 
     // COLORINESSSSSS
     private static final String RESET = "\u001B[0m";
