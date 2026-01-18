@@ -192,47 +192,93 @@ public class Main {
 
     //Función que comprueba que solo hay 1 rey y que hay 8 peones o menos, y que ninguno está en las filas 1 ni 8
     public static boolean piezasCorrectas(String entrada) {
-        boolean valido = true;
+        boolean valido = true; //Esta variable no hace nada---------------------------------------------------------------------------
 
         // 1. Comprobación de que haya EXACTAMENTE 1 Rey
         int reyes = entrada.length() - entrada.replace("R", "").length();
         if (reyes != 1) {
             System.out.println("Error: Debe haber exactamente 1 rey (encontrados: " + reyes + ").");
-            valido = false;
-        }
-
-        // 2. Comprobación de Peones (Solo si el rey está bien)
-        if (valido) {
-            valido = validarPeones(entrada);
-        }
-
-        return valido;
-    }
-
-    private static boolean validarPeones(String entrada) {
-        // Patrón para detectar peones en filas prohibidas (1 y 8)
-        Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
-        if (filaProhibida.matcher(entrada).find()) {
-            System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
             return false;
         }
 
-        // Patrón para contar peones válidos (filas 2 a 7)
-        Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
-        Matcher m = p.matcher(entrada);
+        // 2. Contar piezas
+        int peones = contar(entrada, 'P');
+        int alfiles = contar(entrada, 'A');
+        int torres  = contar(entrada, 'T');
+        int caballos= contar(entrada, 'C');
+        int reinas  = contar(entrada, 'D'); // D = dama
 
-        int contador = 0;
-        while (m.find()) {
-            contador++;
+        // 3. Máximos normales
+        int maxPeones = 8;
+        int maxAlfiles = 2;
+        int maxTorres = 2;
+        int maxCaballos = 2;
+        int maxReinas = 1;
+
+        // 4. Comprobar peones
+        if (peones > maxPeones) {
+            System.out.println("Error: No puede haber más de 8 peones.");
+            return false;
         }
 
-        if (contador > 8) {
-            System.out.println("Error: No puede haber más de " + 8 + " peones. Detectados: " + contador);
+        // 5. Calcular cuántos peones faltan
+        int faltanPeones = maxPeones - peones;
+
+        // 6. Calcular excesos sobre lo normal
+        int excesoAlfiles   = Math.max(0, alfiles - maxAlfiles);
+        int excesoTorres    = Math.max(0, torres - maxTorres);
+        int excesoCaballos  = Math.max(0, caballos - maxCaballos);
+        int excesoReinas    = Math.max(0, reinas - maxReinas);
+
+        int excesoTotal = excesoAlfiles + excesoTorres + excesoCaballos + excesoReinas;
+
+        // 7. Validar promoción
+        if (excesoTotal > faltanPeones) {
+            System.out.println("Error: Hay mas piezas de las permitidas según los peones que faltan.");
             return false;
         }
 
         return true;
     }
+
+
+
+
+//METODO AUXILIAR:
+
+    private static int contar(String entrada, char pieza) {
+        int count = 0;
+        for (int i = 0; i < entrada.length(); i++) {
+            if (entrada.charAt(i) == pieza) count++;
+        }
+        return count;
+    }
+
+
+//    private static boolean validarPeones(String entrada) {
+//        // Patrón para detectar peones en filas prohibidas (1 y 8)
+//        Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
+//        if (filaProhibida.matcher(entrada).find()) {
+//            System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
+//            return false;
+//        }
+//
+//        // Patrón para contar peones válidos (filas 2 a 7)
+//        Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
+//        Matcher m = p.matcher(entrada);
+//
+//        int contador = 0;
+//        while (m.find()) {
+//            contador++;
+//        }
+//
+//        if (contador > 8) {
+//            System.out.println("Error: No puede haber más de " + 8 + " peones. Detectados: " + contador);
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
     public static Posicion convertirPosicion (char columna, char fila){
         int c = columna - 'a';           // a-h → 0-7
