@@ -74,7 +74,10 @@ public class Main {
             Si el carácter actual que recorre el string es una letra o un número es válido.
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
-            valido = Character.isLetterOrDigit(c) || c == ',';
+            if (!Character.isLetterOrDigit(c) && c != ',') {
+                valido = false;
+                break;
+            }
         }
         StringBuilder trozo = new StringBuilder();
         int ultChar = 0;
@@ -101,11 +104,11 @@ public class Main {
                 /*
                 Se comprueba que la primera sea mayúscula (de acuerdo a la notación del ajedrez).
                  */
-                if (trozo.charAt(0) == trozo.toString().toUpperCase().charAt(0)) {
+                if (Character.isLetter(trozo.charAt(0)) && trozo.charAt(0) == trozo.toString().toUpperCase().charAt(0)) {
                     /*
-                    Ahora se comprueba que el siguiente carácter sea una letra.
+                    Ahora se comprueba que el siguiente carácter sea una letra minúscula.
                      */
-                    if (Character.isLetter(trozo.charAt(1))) {
+                    if (Character.isLetter(trozo.charAt(1)) && trozo.charAt(1) == trozo.toString().toLowerCase().charAt(1)) {
                         /*
                         Por último, se comprueba que el siguiente carácter sea un número.
                          */
@@ -130,9 +133,9 @@ public class Main {
                  */
             } else if (trozo.length() == 2) {
                 /*
-                Comprobamos que el primer carácter sea una letra.
+                Comprobamos que el primer carácter sea una letra minúscula.
                  */
-                if (Character.isLetter(trozo.charAt(0))) {
+                if (Character.isLetter(trozo.charAt(0)) && trozo.charAt(0) == trozo.toString().toLowerCase().charAt(0)) {
                     /*
                     Aquí lo mismo, pero comprobamos el número.
                      */
@@ -240,8 +243,49 @@ public class Main {
         return true;
     }
 
+    private static boolean maxPiezas(String entrada) {
+        boolean valido = true;
+        /*
+        3. Comprobación de piezas máximas por equipo (16 piezas)
+         */
+        String trozo = "";
+        int contadorMaxP = 0;
+        /*
+        Comprobamos la entrada de piezas, quitando los espacios
+         */
+        entrada = entrada.replace(" ", "");
 
+        for (int i = 0; i < entrada.length(); i++) {
+            char c = entrada.charAt(i);
 
+            if (c == ',') {
+                if (trozo.length() == 2 || trozo.length() == 3) {
+                    contadorMaxP++;
+                }
+                trozo = "";
+            } else {
+                trozo = trozo + c;
+            }
+        }
+
+            /*
+            Como ya validamos el formato previamente, aquí solo buscamos que tengan o 2 de longitud (peón)
+            o 3 (cualquier otra pieza)
+             */
+        if (trozo.length() == 2 || trozo.length() == 3) {
+            contadorMaxP++;
+        }
+
+            /*
+            Si se pasa del máximo de piezas un equipo, tendrá que volver a introducir las piezas
+             */
+        if (contadorMaxP > 16) {
+            valido = false;
+            System.out.println("Te has pasado del número de piezas totales por equipo. (16)");
+        }
+
+        return valido;
+    }
 
 //METODO AUXILIAR:
 
@@ -402,7 +446,7 @@ public class Main {
         do {
             System.out.println("Introduce la posición inicial de piezas de color blanco:");
             piezasB = scan.nextLine();
-            entradaCorrecta = posicionIni(piezasB)&piezasCorrectas(piezasB);
+            entradaCorrecta = posicionIni(piezasB)&piezasCorrectas(piezasB)&maxPiezas(piezasB);
 
             if (!entradaCorrecta) {
                 System.out.println("Entrada no válida. El formato...");
@@ -412,7 +456,7 @@ public class Main {
         do {
             System.out.println("Introduce las posición inicial de piezas de color negro:");
             piezasN = scan.nextLine();
-            entradaCorrecta = posicionIni(piezasN)&piezasCorrectas(piezasN);
+            entradaCorrecta = posicionIni(piezasN)&piezasCorrectas(piezasN)&maxPiezas(piezasN);
 
             if (!entradaCorrecta) {
                 System.out.println("Entrada no válida. El formato...");
