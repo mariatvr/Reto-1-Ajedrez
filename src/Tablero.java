@@ -111,7 +111,6 @@ public class Tablero {
     public boolean jaque(Posicion p, boolean blanca){
 
         boolean jaque=false;
-        int cont=0;//no hace nada-------------------------------------------------------------------------------
         //Pieza amenazas[]=new Pieza[15]; Para futuras implementaciones
         Posicion posAtacante;
 

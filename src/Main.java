@@ -192,7 +192,6 @@ public class Main {
 
     //Función que comprueba que solo hay 1 rey y que hay 8 peones o menos, y que ninguno está en las filas 1 ni 8
     public static boolean piezasCorrectas(String entrada) {
-        boolean valido = true; //Esta variable no hace nada---------------------------------------------------------------------------
 
         // 1. Comprobación de que haya EXACTAMENTE 1 Rey
         int reyes = entrada.length() - entrada.replace("R", "").length();
@@ -202,7 +201,7 @@ public class Main {
         }
 
         // 2. Contar piezas
-        int peones = contar(entrada, 'P');
+        int peones = contar(entrada, 'P');//------------------------------------
         int alfiles = contar(entrada, 'A');
         int torres  = contar(entrada, 'T');
         int caballos= contar(entrada, 'C');
@@ -255,30 +254,30 @@ public class Main {
     }
 
 
-//    private static boolean validarPeones(String entrada) {
-//        // Patrón para detectar peones en filas prohibidas (1 y 8)
-//        Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
-//        if (filaProhibida.matcher(entrada).find()) {
-//            System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
-//            return false;
-//        }
-//
-//        // Patrón para contar peones válidos (filas 2 a 7)
-//        Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
-//        Matcher m = p.matcher(entrada);
-//
-//        int contador = 0;
-//        while (m.find()) {
-//            contador++;
-//        }
-//
-//        if (contador > 8) {
-//            System.out.println("Error: No puede haber más de " + 8 + " peones. Detectados: " + contador);
-//            return false;
-//        }
-//
-//        return true;
-//    }
+    private static boolean validarPeones(String entrada) {
+        // Patrón para detectar peones en filas prohibidas (1 y 8)
+        Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
+        if (filaProhibida.matcher(entrada).find()) {
+            System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
+            return false;
+        }
+
+        // Patrón para contar peones válidos (filas 2 a 7)
+        Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
+        Matcher m = p.matcher(entrada);
+
+        int contador = 0;
+        while (m.find()) {
+            contador++;
+        }
+
+        if (contador > 8) {
+            System.out.println("Error: No puede haber más de " + 8 + " peones. Detectados: " + contador);
+            return false;
+        }
+
+        return true;
+    }
 
     public static Posicion convertirPosicion (char columna, char fila){
         int c = columna - 'a';           // a-h → 0-7
