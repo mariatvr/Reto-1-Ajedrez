@@ -201,7 +201,7 @@ public class Main {
         }
 
         // 2. Contar piezas
-        int peones = contar(entrada, 'P');//------------------------------------
+        int peones = contar(entrada, 'P');
         int alfiles = contar(entrada, 'A');
         int torres  = contar(entrada, 'T');
         int caballos= contar(entrada, 'C');

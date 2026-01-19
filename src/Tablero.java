@@ -122,8 +122,7 @@ public class Tablero {
                             if (this.getPosicion(posAtacante).compMov(this, p)) {
                                 jaque = true;
                                 break;
-                                //amenazas[cont] = this.getPosicion(posAtacante);
-                                //cont++;
+
                             }
                         }
                     }
