@@ -47,7 +47,7 @@ public class Tablero {
 
             // Comprueba que la posición esté dentro del tablero
             if (fila < 0 || fila > 7 || columna < 0 || columna > 7) {
-                throw new IllegalArgumentException("Posición inválida: " + p);
+                System.out.println("Posición inválida: " + p);
             }
 
             // Comprueba que la casilla esté libre
@@ -111,7 +111,7 @@ public class Tablero {
     public boolean jaque(Posicion p, boolean blanca){
 
         boolean jaque=false;
-        int cont=0;//no hace nada-------------------------------------------------------------------------------
+
         //Pieza amenazas[]=new Pieza[15]; Para futuras implementaciones
         Posicion posAtacante;
 
@@ -123,8 +123,6 @@ public class Tablero {
                             if (this.getPosicion(posAtacante).compMov(this, p)) {
                                 jaque = true;
                                 break;
-                                //amenazas[cont] = this.getPosicion(posAtacante);
-                                //cont++;
                             }
                         }
                     }
@@ -145,7 +143,6 @@ public class Tablero {
             setPieza(pieza, pfinal);
             setPieza(null, pinicial);
             pieza.setPosicion(pfinal); // importante actualizar la posición
-
 
             if (pieza instanceof Peon peon && peon.estaEnFilaFinal()) {
                 Pieza nueva = peon.promocionar();

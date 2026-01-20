@@ -192,57 +192,81 @@ public class Main {
 
     //Función que comprueba que solo hay 1 rey y que hay 8 peones o menos, y que ninguno está en las filas 1 ni 8
     public static boolean piezasCorrectas(String entrada) {
-        boolean valido = true; //Esta variable no hace nada---------------------------------------------------------------------------
 
-        // 1. Comprobación de que haya EXACTAMENTE 1 Rey
-        int reyes = entrada.length() - entrada.replace("R", "").length();
-        if (reyes != 1) {
-            System.out.println("Error: Debe haber exactamente 1 rey (encontrados: " + reyes + ").");
+        //0. Comprobar que no hay piezas fuera de rango
+        Pattern patroncorrecto = Pattern.compile("^[A-Z]?[a-h][1-8](,\\s*[A-Z]?[a-h][1-8]){0,15}$");
+
+        if (patroncorrecto.matcher(entrada).matches()) {
+            // 1. Comprobación de que haya EXACTAMENTE 1 Rey
+            int reyes = entrada.length() - entrada.replace("R", "").length();
+
+            if (reyes != 1) {
+                System.out.println("Error: Debe haber exactamente 1 rey (encontrados: " + reyes + ").");
+                return false;
+            }
+
+            //2.Contar peones
+            int contador = 0;
+            // Patrón para detectar peones en filas prohibidas (1 y 8)
+            Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
+
+            if (filaProhibida.matcher(entrada).find()) {
+                System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
+                return false;
+            }
+
+            // Patrón para contar peones válidos (filas 2 a 7)
+            Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
+            Matcher m = p.matcher(entrada);
+
+            while (m.find()) {
+                contador++;
+            }
+
+            // 3. Contar piezas
+            int peones = contador;
+            int alfiles = contar(entrada, 'A');
+            int torres = contar(entrada, 'T');
+            int caballos = contar(entrada, 'C');
+            int reinas = contar(entrada, 'D'); // D = dama
+
+            // 4. Máximos normales
+            int maxPeones = 8;
+            int maxAlfiles = 2;
+            int maxTorres = 2;
+            int maxCaballos = 2;
+            int maxReinas = 1;
+
+            // 5. Comprobar peones
+            if (peones > maxPeones) {
+                System.out.println("Error: No puede haber más de 8 peones.");
+                return false;
+            }
+
+            // 6. Calcular cuántos peones faltan
+            int faltanPeones = maxPeones - peones;
+
+            // 7. Calcular excesos sobre lo normal
+            int excesoAlfiles = Math.max(0, alfiles - maxAlfiles);
+            int excesoTorres = Math.max(0, torres - maxTorres);
+            int excesoCaballos = Math.max(0, caballos - maxCaballos);
+            int excesoReinas = Math.max(0, reinas - maxReinas);
+
+            int excesoTotal = excesoAlfiles + excesoTorres + excesoCaballos + excesoReinas;
+
+            // 8. Validar promoción
+            if (excesoTotal > faltanPeones) {
+                System.out.println("Error: Hay mas piezas de las permitidas según los peones que faltan.");
+                return false;
+            }
+
+            return true;
+        }
+        else{
+            System.out.println("Error: Formato inválido.");
             return false;
         }
-
-        // 2. Contar piezas
-        int peones = contar(entrada, 'P');
-        int alfiles = contar(entrada, 'A');
-        int torres  = contar(entrada, 'T');
-        int caballos= contar(entrada, 'C');
-        int reinas  = contar(entrada, 'D'); // D = dama
-
-        // 3. Máximos normales
-        int maxPeones = 8;
-        int maxAlfiles = 2;
-        int maxTorres = 2;
-        int maxCaballos = 2;
-        int maxReinas = 1;
-
-        // 4. Comprobar peones
-        if (peones > maxPeones) {
-            System.out.println("Error: No puede haber más de 8 peones.");
-            return false;
-        }
-
-        // 5. Calcular cuántos peones faltan
-        int faltanPeones = maxPeones - peones;
-
-        // 6. Calcular excesos sobre lo normal
-        int excesoAlfiles   = Math.max(0, alfiles - maxAlfiles);
-        int excesoTorres    = Math.max(0, torres - maxTorres);
-        int excesoCaballos  = Math.max(0, caballos - maxCaballos);
-        int excesoReinas    = Math.max(0, reinas - maxReinas);
-
-        int excesoTotal = excesoAlfiles + excesoTorres + excesoCaballos + excesoReinas;
-
-        // 7. Validar promoción
-        if (excesoTotal > faltanPeones) {
-            System.out.println("Error: Hay mas piezas de las permitidas según los peones que faltan.");
-            return false;
-        }
-
-        return true;
     }
-
-
-
 
 //METODO AUXILIAR:
 
@@ -253,32 +277,6 @@ public class Main {
         }
         return count;
     }
-
-
-//    private static boolean validarPeones(String entrada) {
-//        // Patrón para detectar peones en filas prohibidas (1 y 8)
-//        Pattern filaProhibida = Pattern.compile("(?<![A-Z])[a-h][18]");
-//        if (filaProhibida.matcher(entrada).find()) {
-//            System.out.println("Error: Hay peones en la fila 1 u 8, lo cual es ilegal.");
-//            return false;
-//        }
-//
-//        // Patrón para contar peones válidos (filas 2 a 7)
-//        Pattern p = Pattern.compile("(?<![A-Z])[a-h][2-7]");
-//        Matcher m = p.matcher(entrada);
-//
-//        int contador = 0;
-//        while (m.find()) {
-//            contador++;
-//        }
-//
-//        if (contador > 8) {
-//            System.out.println("Error: No puede haber más de " + 8 + " peones. Detectados: " + contador);
-//            return false;
-//        }
-//
-//        return true;
-//    }
 
     public static Posicion convertirPosicion (char columna, char fila){
         int c = columna - 'a';           // a-h → 0-7
@@ -390,6 +388,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         boolean mueven;
         boolean entradaCorrecta;
+        boolean tableroOk=false;
         String piezasB;
         String piezasN;
         String movimiento;
@@ -400,30 +399,37 @@ public class Main {
        /*
        Se pide la entrada del tablero inicial
         */
-        do {
-            System.out.println("Introduce la posición inicial de piezas de color blanco:");
-            piezasB = scan.nextLine();
-            entradaCorrecta = posicionIni(piezasB)&piezasCorrectas(piezasB);
+         do {
+             try {
+                 do {
+                     System.out.println("Introduce la posición inicial de piezas de color blanco:");
+                     piezasB = scan.nextLine();
+                     entradaCorrecta = posicionIni(piezasB) & piezasCorrectas(piezasB);
 
-            if (!entradaCorrecta) {
-                System.out.println("Entrada no válida. El formato...");
-            }
-        } while (!entradaCorrecta);
+                     if (!entradaCorrecta) {
+                         System.out.println("Entrada no válida. El formato...");
+                     }
+                 } while (!entradaCorrecta);
 
-        do {
-            System.out.println("Introduce las posición inicial de piezas de color negro:");
-            piezasN = scan.nextLine();
-            entradaCorrecta = posicionIni(piezasN)&piezasCorrectas(piezasN);
+                 do {
+                     System.out.println("Introduce las posición inicial de piezas de color negro:");
+                     piezasN = scan.nextLine();
+                     entradaCorrecta = posicionIni(piezasN) & piezasCorrectas(piezasN);
 
-            if (!entradaCorrecta) {
-                System.out.println("Entrada no válida. El formato...");
-            }
-        } while (!entradaCorrecta);
+                     if (!entradaCorrecta) {
+                         System.out.println("Entrada no válida. El formato...");
+                     }
+                 } while (!entradaCorrecta);
 
-        /*inicializamos tablero*/
-        tablero.colocarPiezasDesdeNotacion(piezasB, true);
-        tablero.colocarPiezasDesdeNotacion(piezasN, false);
-
+                 /*inicializamos tablero*/
+                 tablero.colocarPiezasDesdeNotacion(piezasB, true);
+                 tablero.colocarPiezasDesdeNotacion(piezasN, false);
+                 tableroOk=true;
+             }
+             catch (IllegalArgumentException e) {
+             System.out.println(e.getMessage());
+             }
+         }while(tableroOk);
         // Imprimir tablero
         System.out.println("Tablero Inicial:");
         System.out.println(tablero);
