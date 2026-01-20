@@ -360,7 +360,7 @@ public class Main {
             boolean jaque = tablero.jaque(posRey, blancas);
 
             if(jaque){
-                if (!blancas){
+                if (blancas){
                     System.out.println("El Rey blanco está en Jaque, blancas pierden");
                 }else{
                     System.out.println("El Rey negro está en Jaque, negras pierden");
@@ -439,6 +439,7 @@ public class Main {
              }
              if (!entradaCorrecta) {
                  System.out.println("Entrada no válida. El formato...");
+                 piezasT.delete(0,piezasT.length());
              }
          } while (!entradaCorrecta||!posOK);
 
@@ -459,6 +460,8 @@ public class Main {
              }
              if (!entradaCorrecta) {
                  System.out.println("Entrada no válida. El formato...");
+                 piezasT.delete(0,piezasT.length());
+                 piezasT.append(piezasB);
              }
          } while (!entradaCorrecta||!posOK);
 

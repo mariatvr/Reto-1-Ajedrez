@@ -21,9 +21,9 @@ public boolean compMov(Tablero t, Posicion p) {
         /*
         Si se puede mover en horizontal.
          */
-
-    if (t.caminoLibre(this.p, p, dirFila,dirCol)) {
-        if(dirFila == 0 || dirCol == 0 || Math.abs(df)==Math.abs(dc)) {
+    if(dirFila == 0 || dirCol == 0 || Math.abs(df)==Math.abs(dc))
+    {
+        if (t.caminoLibre(this.p, p, dirFila,dirCol)){
             if (t.getPosicion(p) == null || t.getPosicion(p).getBlancas() != this.blancas) {
                 valido=true;
             }
