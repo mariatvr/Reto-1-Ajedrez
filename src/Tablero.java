@@ -111,7 +111,6 @@ public class Tablero {
     public boolean jaque(Posicion p, boolean blanca){
 
         boolean jaque=false;
-
         //Pieza amenazas[]=new Pieza[15]; Para futuras implementaciones
         Posicion posAtacante;
 
@@ -123,6 +122,7 @@ public class Tablero {
                             if (this.getPosicion(posAtacante).compMov(this, p)) {
                                 jaque = true;
                                 break;
+
                             }
                         }
                     }
