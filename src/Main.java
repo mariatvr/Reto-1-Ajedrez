@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,16 +27,21 @@ public class Main {
     public static boolean jugadorInicial(Tablero miTablero) {
         String inicia;
         boolean blancas;
+        boolean jaqueBlanco=false;
+        boolean jaqueNegro=false;
         Scanner sc = new Scanner(System.in);
 
         //Buscamos al Rey blanco y comprobamos jaque
         Posicion posReyBlanco = localizarRey(miTablero, true);
-        boolean jaqueBlanco = miTablero.jaque(posReyBlanco, true);
+        if(posReyBlanco != null){
+            jaqueBlanco = miTablero.jaque(posReyBlanco, true);
+        }
 
         //Buscamos al Rey negro y comprobamos jaque
         Posicion posReyNegro = localizarRey(miTablero, false);
-        boolean jaqueNegro = miTablero.jaque(posReyNegro, false);
-
+        if(posReyNegro!=null){
+            jaqueNegro = miTablero.jaque(posReyNegro, false);
+        }
 
         if (jaqueBlanco) {
             System.out.println("Mueven blancas.");
@@ -75,7 +82,6 @@ public class Main {
             Lo mismo pasa si contiene un espacio, que sería el separador de cada movimiento.
              */
             if (!Character.isLetterOrDigit(c) && c != ',') {
-                valido = false;
                 break;
             }
         }
@@ -271,51 +277,23 @@ public class Main {
         }
     }
 
-    private static boolean maxPiezas(String entrada) {
-        boolean valido = true;
-        /*
-        3. Comprobación de piezas máximas por equipo (16 piezas)
-         */
-        String trozo = "";
-        int contadorMaxP = 0;
-        /*
-        Comprobamos la entrada de piezas, quitando los espacios
-         */
-        entrada = entrada.replace(" ", "");
+    public static boolean posicionesNoRepetidas(String entrada) {
 
-        for (int i = 0; i < entrada.length(); i++) {
-            char c = entrada.charAt(i);
+        String[] split = entrada.split(",\\s*");
+        Set<String> posiciones = new HashSet<>();
 
-            if (c == ',') {
-                if (trozo.length() == 2 || trozo.length() == 3) {
-                    contadorMaxP++;
-                }
-                trozo = "";
-            } else {
-                trozo = trozo + c;
+        for (String subcadena : split) {
+            // La posición SIEMPRE son los dos últimos caracteres
+            String pos = subcadena.substring(subcadena.length() - 2);
+
+            // add() devuelve false si ya estaba
+            if (!posiciones.add(pos)) {
+                System.out.println("Posición repetida: " + pos);
+                return false;
             }
         }
-
-            /*
-            Como ya validamos el formato previamente, aquí solo buscamos que tengan o 2 de longitud (peón)
-            o 3 (cualquier otra pieza)
-             */
-        if (trozo.length() == 2 || trozo.length() == 3) {
-            contadorMaxP++;
-        }
-
-            /*
-            Si se pasa del máximo de piezas un equipo, tendrá que volver a introducir las piezas
-             */
-        if (contadorMaxP > 16) {
-            valido = false;
-            System.out.println("Te has pasado del número de piezas totales por equipo. (16)");
-        }
-
-        return valido;
+        return true;
     }
-
-//METODO AUXILIAR:
 
     private static int contar(String entrada, char pieza) {
         int count = 0;
@@ -390,6 +368,7 @@ public class Main {
             }
         }
     }
+
     public static void mover (Tablero t, String movimiento, boolean blancas) {
 
         char tipo='p';
@@ -435,8 +414,10 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         boolean mueven;
         boolean entradaCorrecta;
+        boolean posOK;
         String piezasB;
         String piezasN;
+        StringBuilder piezasT=new StringBuilder();
         String movimiento;
 
         // Imprimir tablero
@@ -446,36 +427,45 @@ public class Main {
        Se pide la entrada del tablero inicial
         */
          do {
-             try {
-                 do {
-                     System.out.println("Introduce la posición inicial de piezas de color blanco:");
-                     piezasB = scan.nextLine();
-                     entradaCorrecta = posicionIni(piezasB) & piezasCorrectas(piezasB)&maxPiezas(piezasB);
+             System.out.println("Introduce la posición inicial de piezas de color blanco:");
+             piezasB = scan.nextLine();
+             entradaCorrecta = posicionIni(piezasB) & piezasCorrectas(piezasB);
+             piezasT.append(piezasB);
+             posOK=posicionesNoRepetidas(piezasT.toString());
 
-                     if (!entradaCorrecta) {
-                         System.out.println("Entrada no válida. El formato...");
-                     }
-                 } while (!entradaCorrecta);
-
-                 do {
-                     System.out.println("Introduce las posición inicial de piezas de color negro:");
-                     piezasN = scan.nextLine();
-                     entradaCorrecta = posicionIni(piezasN) & piezasCorrectas(piezasN)&maxPiezas(piezasN);
-
-                     if (!entradaCorrecta) {
-                         System.out.println("Entrada no válida. El formato...");
-                     }
-                 } while (!entradaCorrecta);
-
-                 /*inicializamos tablero*/
-                 tablero.colocarPiezasDesdeNotacion(piezasB, true);
-                 tablero.colocarPiezasDesdeNotacion(piezasN, false);
-                 tableroOk=true;
+             if(!posOK){
+                 System.out.println("Hay piezas repetidas");
+                 piezasT.delete(0,piezasT.length());
              }
-             catch (IllegalArgumentException e) {
-             System.out.println(e.getMessage());
+             if (!entradaCorrecta) {
+                 System.out.println("Entrada no válida. El formato...");
              }
-         }while(tableroOk);
+         } while (!entradaCorrecta||!posOK);
+
+         piezasT.append(",");
+
+         do {
+             System.out.println("Introduce las posición inicial de piezas de color negro:");
+             piezasN = scan.nextLine();
+             entradaCorrecta = posicionIni(piezasN) & piezasCorrectas(piezasN);
+
+             piezasT.append(piezasN);
+
+             posOK=posicionesNoRepetidas(piezasT.toString());
+             if(!posOK){
+                 System.out.println("Hay piezas repetidas");
+                 piezasT.delete(0,piezasT.length());
+                 piezasT.append(piezasB);
+             }
+             if (!entradaCorrecta) {
+                 System.out.println("Entrada no válida. El formato...");
+             }
+         } while (!entradaCorrecta||!posOK);
+
+         /*inicializamos tablero*/
+         tablero.colocarPiezasDesdeNotacion(piezasB, true);
+         tablero.colocarPiezasDesdeNotacion(piezasN, false);
+
         // Imprimir tablero
         System.out.println("Tablero Inicial:");
         System.out.println(tablero);
